@@ -1,5 +1,5 @@
 import { Injectable, Inject } from '@angular/core';
-import { LANG, storageKey } from './config';
+import { LANG, storageKey } from './config/config';
 import { TranslateService } from '@ngx-translate/core';
 import { UrlService } from './service/url.service';
 

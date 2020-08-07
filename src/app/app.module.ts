@@ -8,7 +8,7 @@ import { AppService } from './app.service';
 import { RouterModule } from '@angular/router';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
-import { I18N } from './config';
+import { I18N } from './config/config';
 import { UrlService } from './service/url.service';
 import { LoggerService } from './service/logger.service';
 

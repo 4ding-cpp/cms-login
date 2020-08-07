@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { TokenDefault, LOCALCMS } from '../config';
+import { TokenDefault, LOCALCMS } from '../config/config';
 import { LoggerService } from './logger.service';
 
 @Injectable()
