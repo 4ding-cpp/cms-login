@@ -1,0 +1,26 @@
+.error-message {
+  font-size: 0.4rem;
+  padding: 0 10px;
+}
+
+.wrapper {
+  position: relative;
+}
+
+.org_box_cor {
+  width: 0;
+  height: 0;
+  font-size: 0;
+  border-style: solid;
+  overflow: hidden;
+  position: absolute;
+  border-width: 15px;
+  border-color: transparent #f3961c transparent transparent;
+  left: -25px;
+}
+
+@media screen and (max-width: 470px) {
+  .org_box_cor{
+    border-width:0
+  }
+}
