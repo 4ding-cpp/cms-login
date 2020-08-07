@@ -3,12 +3,13 @@ import { MatIconRegistry, MatDialog } from "@angular/material";
 import { DomSanitizer } from "@angular/platform-browser";
 import { Validators, FormGroup, FormBuilder } from "@angular/forms";
 import { HttpHeaders, HttpClient } from "@angular/common/http";
-import { COPYRIGHT, ICONS, LANG, LOGOURL, BACKURL } from "./config/config";
+import { COPYRIGHT, LANG } from "./config/config";
 import { DialogAlertComponent } from "./shared/dialog/alert/dialog-alert.component";
 import { Observable } from "rxjs/internal/Observable";
 import { map } from "rxjs/operators";
 import { AppService } from "./app.service";
 import { UrlService } from "./service/url.service";
+import { ICONS } from "./config";
 
 @Component({
   selector: "app-root",
@@ -17,8 +18,6 @@ import { UrlService } from "./service/url.service";
 })
 export class AppComponent {
   LANG = LANG;
-  LOGOURL = LOGOURL;
-  BACKURL = BACKURL;
   COPYRIGHT = COPYRIGHT;
   form: FormGroup;
   isLocal = false;
@@ -29,8 +28,7 @@ export class AppComponent {
     private fb: FormBuilder,
     private service: AppService,
     public dialog: MatDialog,
-    private urlService: UrlService,
-    private http: HttpClient
+    private urlService: UrlService
   ) {
     ICONS.forEach((val) => {
       this.matIconRegistry.addSvgIcon(
@@ -48,45 +46,8 @@ export class AppComponent {
     this.form = this.fb.group({
       account: ["", [Validators.required, Validators.minLength(6)]],
       password: ["", [Validators.required, Validators.minLength(6)]],
-      otp: [""],
-      seLang: [this.service.getDefaultLang()],
+      seLang: [this.service.getLang()],
     });
-  }
-
-  submit() {
-    this.login(
-      this.form.value.account,
-      this.form.value.password,
-      this.form.value.otp
-    ).subscribe((val) => {
-      if (!val.e && !!val.token) {
-        window.location.href = `${this.urlService.getCMSHost(val.token)}`;
-      } else {
-        this.dialogOpen(val.e);
-      }
-    });
-  }
-
-  login(account: string, password: string, otp: string): Observable<any> {
-    const url = this.urlService.getLoginHost();
-    const body = {
-      account: account,
-      password: password,
-      OTP: otp,
-    };
-    const headers = new HttpHeaders().set(
-      "Content-Type",
-      "text/plain; charset=utf-8"
-    );
-    return this.http
-      .post(url, JSON.stringify(body), {
-        headers: headers,
-      })
-      .pipe(
-        map((res: Response) => {
-          return res;
-        })
-      );
   }
 
   dialogOpen(errorcode: number) {

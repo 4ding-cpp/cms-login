@@ -1,4 +1,6 @@
-<div class="wrapper" *ngIf="errorMessage !== null">
-    <span class="org_box_cor"></span>
-    <div class="error-message">{{errorMessage | translate}}</div>
+<div class="tip">
+  <ng-container *ngIf="errorMessage !== null">
+    <mat-icon svgIcon="tip"></mat-icon>
+    <span>{{ errorMessage | translate }}</span>
+  </ng-container>
 </div>

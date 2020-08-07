@@ -1,18 +1,39 @@
-import { Component, Inject } from '@angular/core';
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { ErrorCodeService } from 'src/app/shared/dialog/alert/base/errorcode.service';
+import { Component, Inject, OnInit } from "@angular/core";
+import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material/dialog";
+import { filter, take } from "rxjs/operators";
+import { ErrorCodeMsg } from "../../../config";
 
 @Component({
-  selector: 'share-dialog-alert',
-  templateUrl: './dialog-alert.component.html',
-  styleUrls: ['./dialog-alert.component.css']
+  selector: "share-dialog-alert",
+  templateUrl: "./dialog-alert.component.html",
+  styleUrls: ["./dialog-alert.component.css"],
 })
-export class DialogAlertComponent extends ErrorCodeService {
-  constructor(@Inject(MAT_DIALOG_DATA) public data: { errorcode: number }) {
-    super();
+export class DialogAlertComponent implements OnInit {
+  private ErrorCodeMsg = ErrorCodeMsg;
+
+  constructor(
+    public dialogRef: MatDialogRef<DialogAlertComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: { errorcode: number }
+  ) {}
+
+  ngOnInit() {
+    this.dialogRef
+      .keydownEvents()
+      .pipe(
+        filter((e: KeyboardEvent) => e.key === "Enter"),
+        take(1)
+      )
+      .subscribe(() => {
+        this.dialogRef.close();
+      });
   }
 
   getMsgName(): string {
-    return super.getMsgName(this.data.errorcode);
+    if (!!this.data) {
+      let result = this.ErrorCodeMsg.filter(
+        (item) => item.code === this.data.errorcode
+      );
+      return !!result.length ? result[0].name : "err_fail";
+    }
   }
 }

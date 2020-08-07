@@ -1,26 +1,17 @@
-.error-message {
-  font-size: 0.4rem;
-  padding: 0 10px;
+.tip {
+  display: flex;
+  color: #df7607;
+  font-size: 0.6rem;
+  height: 15px;
+  padding-top: 5px;
 }
 
-.wrapper {
-  position: relative;
+.tip > * {
+  margin: auto 0;
 }
 
-.org_box_cor {
-  width: 0;
-  height: 0;
-  font-size: 0;
-  border-style: solid;
-  overflow: hidden;
-  position: absolute;
-  border-width: 15px;
-  border-color: transparent #f3961c transparent transparent;
-  left: -25px;
-}
-
-@media screen and (max-width: 470px) {
-  .org_box_cor{
-    border-width:0
-  }
+.tip .mat-icon {
+  height: 15px;
+  width: 15px;
+  padding-right: 5px;
 }

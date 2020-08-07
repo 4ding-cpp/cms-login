@@ -1,59 +1,37 @@
-import { Injectable } from '@angular/core';
-import { TokenDefault, LOCALCMS } from '../config/config';
-import { LoggerService } from './logger.service';
+import { Injectable } from "@angular/core";
+import { LoggerService } from "./logger.service";
+import { ApiUrl, LOCALCMS } from "../config";
 
 @Injectable()
 export class UrlService {
-  identity = 'gn';
-  identityName = 'master';
-  host = '';
-  protocal = '';
-  hostBody = TokenDefault; //gmc222.com
+  ApiUrl = ApiUrl;
+  LOCALCMS = LOCALCMS;
+  host = "";
+  protocal = "";
   localCMS = false;
 
   constructor(private logger: LoggerService) {}
 
   setProtocol(protocal: string) {
-    this.logger.print('real-protocal', protocal);
+    this.logger.print("real-protocal", protocal);
     this.protocal = protocal;
   }
 
   setHost(host: string) {
-    this.logger.print('real-host', host);
+    this.logger.print("real-host", host);
     this.host = host;
-    if (host != 'localhost') {
-      let s = host.split('.');
-      this.identity = s[0];
-      if (s[0] === 'ag') {
-        this.identityName = 'agent';
-      }
-      if (s[0] === 'gn') {
-        this.identityName = 'master';
-      }
-      this.hostBody = s.splice(1).join('.'); //gmc245.com
-    }
-    this.logger.print('use-host', this.hostBody);
   }
 
   setLocalCMS(toggle: boolean) {
     this.localCMS = toggle;
   }
 
-  getCMSHost(token: string): string {
-    //跳轉到CMS
-    let hostReplace = this.hostBody;
+  cmsUrl(token: string): string {
+    let url = `${this.protocal}//${ApiUrl}?token=${token}`;
     if (this.localCMS) {
-      hostReplace = LOCALCMS; //local.com:4200
+      url = `http://${LOCALCMS}?token=${token}`;
     }
-    let url = `${this.protocal}//${this.identity}.${hostReplace}?token=${token}`;
-    this.logger.print('CMS', url);
-    return url;
-  }
-
-  getLoginHost(): string {
-    //拿token
-    let url = `${this.protocal}//${this.identity}.${this.hostBody}/api/login/${this.identityName}`;
-    this.logger.print('to Login', url);
+    this.logger.print("CMS", url);
     return url;
   }
 }

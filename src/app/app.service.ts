@@ -1,12 +1,12 @@
 import { Injectable, Inject } from '@angular/core';
-import { LANG, storageKey } from './config/config';
+import { LANG, LangKey } from './config/config';
 import { TranslateService } from '@ngx-translate/core';
 import { UrlService } from './service/url.service';
 
 @Injectable()
 export class AppService {
   private lang = 'cn';
-  storageKey = storageKey;
+  LangKey = LangKey;
 
   constructor(
     @Inject('HOST') private host: string,
@@ -20,25 +20,23 @@ export class AppService {
   }
 
   initLang() {
-    let arr = [];
-    LANG.forEach(item => {
-      arr.push(item.short);
+    let arr = LANG.map((item) => {
+      return item.short;
     });
     this.translate.addLangs(arr);
-
-    if (!!localStorage.getItem(this.storageKey)) {
-      this.lang = localStorage.getItem(this.storageKey);
+    if (!!localStorage.getItem(this.LangKey)) {
+      this.lang = localStorage.getItem(this.LangKey);
     }
     this.translate.use(this.lang);
   }
 
-  getDefaultLang() {
+  getLang() {
     return this.lang;
   }
 
   setLang(lang: string) {
     this.lang = lang;
-    localStorage.setItem(this.storageKey, lang);
+    localStorage.setItem(this.LangKey, lang);
     this.translate.use(lang);
   }
 }
