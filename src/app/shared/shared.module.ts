@@ -4,14 +4,7 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { ValidationModule } from "./validation/validation.module";
 import { DialogModule } from "./dialog/dialog.module";
 import { TranslateModule } from "@ngx-translate/core";
-import {
-  MatStepperModule,
-  MatDialogModule,
-  MatCardModule,
-  MatButtonModule,
-  MatIconModule,
-  MatRadioModule,
-} from "@angular/material";
+import { MateriaModule } from "./materia.module";
 
 @NgModule({
   imports: [
@@ -21,12 +14,7 @@ import {
     DialogModule,
     ValidationModule,
     TranslateModule,
-    MatStepperModule,
-    MatDialogModule,
-    MatCardModule,
-    MatButtonModule,
-    MatIconModule,
-    MatRadioModule,
+    MateriaModule,
   ],
   exports: [
     CommonModule,
@@ -35,12 +23,7 @@ import {
     DialogModule,
     ValidationModule,
     TranslateModule,
-    MatStepperModule,
-    MatDialogModule,
-    MatCardModule,
-    MatButtonModule,
-    MatIconModule,
-    MatRadioModule,
+    MateriaModule,
   ],
   declarations: [],
 })

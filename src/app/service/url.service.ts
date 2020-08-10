@@ -2,7 +2,9 @@ import { Injectable } from "@angular/core";
 import { LoggerService } from "./logger.service";
 import { ApiUrl, LOCALCMS } from "../config";
 
-@Injectable()
+@Injectable({
+  providedIn: "root",
+})
 export class UrlService {
   ApiUrl = ApiUrl;
   LOCALCMS = LOCALCMS;
