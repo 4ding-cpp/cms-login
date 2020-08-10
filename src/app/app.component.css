@@ -1,20 +1,76 @@
+:host ::ng-deep router-outlet + * {
+  display: flex;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+}
+
+:host {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
 .container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  background-color: #eee;
+}
+
+/* main */
+.mat-card {
+  margin: auto;
+  padding: 0;
+  display: flex;
+  width: 730px;
+  height: 560px;
+}
+
+.mat-card > * {
+  height: 100%;
+}
+
+.mat-card .side {
+  flex: 0 0 195px;
+  width: 195px;
+  background-color: #d5d5f8;
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
 }
 
-main {
+.mat-card > *:not(.side) {
   flex: 1 1 100%;
-  background-color: #f0edfc;
 }
 
-footer {
-  height: 30px;
-  flex: 0 0 30px;
-  background-color: #444054;
+/* Side */
+.side .bg {
+  position: absolute;
+  bottom: 1px;
+  left: 0;
+  z-index: 0;
+}
+
+.side > *:not(.bg) {
+  z-index: 1;
+  color: #fff;
   display: flex;
 }
 
-footer > * {
+.side .footer {
+  font-size: 0.6rem;
+}
+
+.side .footer > * {
   margin: auto;
+  padding-bottom: 20px;
+}
+
+.side .logo img {
+  width: 150px;
+  margin: auto;
+  padding: 20px 0;
 }

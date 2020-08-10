@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { LoggerService } from "./logger.service";
-import { ApiUrl, LOCALCMS, CheckUrl } from "../config";
+import { ApiUrl, LOCALCMS, CheckUrl, LoginUrl } from "../config";
 import { Observable } from "rxjs/internal/Observable";
 import { HttpHeaders, HttpClient } from "@angular/common/http";
 import { map } from "rxjs/operators";
@@ -24,17 +24,17 @@ export class DataService {
       password: obj.password || "",
       token: obj.token || "",
     };
-    return this.connect(body);
+    return this.connect(body, LoginUrl);
   }
 
   connectCheck(account: string): Observable<Response> {
     let body = {
       account: account,
     };
-    return this.connect(body);
+    return this.connect(body, CheckUrl);
   }
 
-  connect(body: ILogin): Observable<Response> {
+  connect(body: ILogin, url: string): Observable<Response> {
     return this.http
       .post(CheckUrl, JSON.stringify(body), {
         headers: this.headers,

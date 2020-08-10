@@ -2,13 +2,7 @@
   <mat-step [stepControl]="accountFormGroup">
     <form [formGroup]="accountFormGroup">
       <ng-template matStepLabel>Fill out your account</ng-template>
-      <mat-form-field>
-        <input
-          placeholder="import_account"
-          formControlName="account"
-          required
-        />
-      </mat-form-field>
+      <input placeholder="import_account" formControlName="account" required />
       <div>
         <button matStepperNext (click)="cccc()">Next</button>
       </div>

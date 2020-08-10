@@ -1,7 +1,7 @@
 import { Component, ViewChild } from "@angular/core";
 import { MatIconRegistry, MatDialog } from "@angular/material";
 import { DomSanitizer } from "@angular/platform-browser";
-import { COPYRIGHT } from "./config/config";
+import { COPYRIGHT, LoginImg, LogoImg } from "./config/config";
 import { DialogAlertComponent } from "./shared/dialog/alert/dialog-alert.component";
 import { AppService } from "./app.service";
 import { UrlService } from "./service/url.service";
@@ -17,6 +17,8 @@ import { DataService } from "./service/data.service";
 export class AppComponent {
   @ViewChild(MainComponent, { static: false })
   childComp: MainComponent;
+  LoginImg = LoginImg;
+  LogoImg = LogoImg
   COPYRIGHT = COPYRIGHT;
   isLocal = false;
 

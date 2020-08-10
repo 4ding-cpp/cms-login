@@ -1,10 +1,17 @@
 <div class="container">
-  <main>
-    <mat-card>
+  <mat-card>
+    <div class="side">
+      <img [src]="LoginImg" alt="login-left" class="bg"/>
+      <div class="logo">
+        <img [src]="LogoImg" alt="logo">
+      </div>
+      <div class="footer">
+        <span>{{ COPYRIGHT }}</span>
+      </div>
+    </div>
+    <div>
       <app-main></app-main>
-    </mat-card>
-  </main>
-  <footer>
-    <span>{{ COPYRIGHT }}</span>
-  </footer>
+      <div class="login"></div>
+    </div>
+  </mat-card>
 </div>

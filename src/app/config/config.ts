@@ -13,8 +13,8 @@ export const LoginUrl = "https://store.4ding.site/sign/in";
 export const LOCALCMS = "localhost:4200";
 
 export const LoginImg= "assets/img/login.png";
-export const LogoImg = "assets/img/logo-40.png";
-export const LogoTagImg = "assets/img/logo-tag-40.png";
+export const LogoImg = "assets/img/text_1.svg";
+export const LogoTagImg = "assets/img/tag_orange.svg";
 
 /* Storage */
 export const LangKey = "lang-sel";
