@@ -8,6 +8,7 @@ import { ApiUrl, LOCALCMS } from "../config";
 export class UrlService {
   ApiUrl = ApiUrl;
   LOCALCMS = LOCALCMS;
+  identity = "store";
   host = "";
   protocal = "";
   localCMS = false;
@@ -28,8 +29,12 @@ export class UrlService {
     this.localCMS = toggle;
   }
 
+  setIdentity(identity:string){
+    this.identity = identity
+  }
+
   cmsUrl(token: string): string {
-    let url = `${this.protocal}//${ApiUrl}?token=${token}`;
+    let url = `${this.protocal}//${this.identity}.${ApiUrl}?token=${token}`;
     if (this.localCMS) {
       url = `http://${LOCALCMS}?token=${token}`;
     }

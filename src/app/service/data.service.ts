@@ -9,11 +9,11 @@ export interface ILogin {
   password?: string;
   phone?: string;
   email?: string;
-  phoneToken?: string;
-  emailToken?: string;
+  accountToken?: string;
   loginToken?: string;
   accountVF?: string;
   passwordVF?: string;
+  errorcode?: number;
 }
 
 @Injectable({
@@ -31,15 +31,15 @@ export class DataService {
 
   constructor(private logger: LoggerService, private http: HttpClient) {}
 
-  connectLogin(obj: ILogin): Observable<HttpResponse<string>> {
+  connectLogin(obj: ILogin): Observable<string> {
     let body = {
-      email: obj.phoneToken || obj.emailToken || "",
+      email: obj.accountToken || "",
       password: obj.password || "",
     };
     return this.connect(obj.passwordVF, body, LoginUrl);
   }
 
-  connectCheck(obj: ILogin): Observable<HttpResponse<string>> {
+  connectCheck(obj: ILogin): Observable<string> {
     let body = {
       phone: obj.phone || "",
       email: obj.email || "",
@@ -47,18 +47,13 @@ export class DataService {
     return this.connect(obj.accountVF, body, CheckUrl);
   }
 
-  connect(
-    vf: string,
-    body: ILogin,
-    url: string
-  ): Observable<HttpResponse<string>> {
+  connect(vf: string, body: ILogin, url: string): Observable<string> {
     let u = `${url}?vf=${vf}`;
-    //let headers = { "content-type": "application/json" };
-    let b = JSON.stringify(body);
-    console.log(u);
-    return this.http.post(u, b, this.options).pipe(
+    return this.http.post(u, body, this.options).pipe(
       map((res: HttpResponse<string>) => {
-        return res;
+        this.logger.print("response", res);
+        if (res.status !== 200) return "";
+        return res.body;
       })
     );
   }

@@ -30,8 +30,6 @@ export class CaptchaService {
       VFKEY,
       vfMode,
       (vf) => {
-        console.log("This is your vf: ", vf);
-
         let o = <ILogin>{
           accountVF: "",
           passwordVF: "",

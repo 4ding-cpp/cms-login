@@ -7,6 +7,7 @@ import { Subscription } from "rxjs/internal/Subscription";
 import { UrlService } from "../service/url.service";
 import { DialogAlertComponent } from "../shared/dialog/alert/dialog-alert.component";
 import { DialogWidth } from "../config";
+import { HttpResponse } from "@angular/common/http";
 
 @Component({
   selector: "app-login",
@@ -37,10 +38,9 @@ export class LoginComponent implements OnInit, OnDestroy {
       this.subscription = this.captcha
         .isCaptchaIn()
         .subscribe((token: ILogin) => {
-          this.token = { ...token };
+          this.token = { ...this.token, ...token };
           this.isLoading = "";
-
-          if (!!this.accountFormGroup && !!token.accountVF) {
+          if (!!this.accountFormGroup && !!this.token.accountVF) {
             this.setAccountToken();
           }
           if (!!this.token.passwordVF) {
@@ -55,8 +55,7 @@ export class LoginComponent implements OnInit, OnDestroy {
       password: "",
       phone: "",
       email: "",
-      phoneToken: "",
-      emailToken: "",
+      accountToken: "",
       loginToken: "",
       accountVF: "",
       passwordVF: "",
@@ -95,9 +94,9 @@ export class LoginComponent implements OnInit, OnDestroy {
   }
 
   setAccountToken() {
-    this.dataService.connectCheck(this.token).subscribe((res) => {
-      console.log("account token", res);
-      //this.token.emailToken
+    this.dataService.connectCheck(this.token).subscribe((token: string) => {
+      console.log("account token", token);
+      this.token.accountToken = token
       this.stepper.next();
     });
   }
@@ -110,9 +109,12 @@ export class LoginComponent implements OnInit, OnDestroy {
   }
 
   login() {
-    this.dataService.connectLogin(this.token).subscribe((res) => {
-      console.log("cms token", res);
-      //this.token.loginToken
+    this.dataService.connectLogin(this.token).subscribe((token: string) => {
+      if(!token) this.dialogOpen(1);
+      this.token.loginToken = token
+      //login access
+      this.urlService.setIdentity(this.identityFormGroup.value.identity)
+      window.location.href = this.urlService.cmsUrl(token);
     });
   }
 
