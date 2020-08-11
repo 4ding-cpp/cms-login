@@ -1,77 +1,15 @@
-/* You can add global styles to this file, and also import other style files */
 @import "~normalize.css";
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
-@import "assets/css/dialog.css";
 
-*,
-*::after,
-*::befor {
-  box-sizing: inherit;
-}
+@import "assets/css/_global.css";
+@import "assets/css/layout/_button.css";
+@import "assets/css/layout/_item.css";
 
-html {
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  -ms-box-sizing: border-box;
-  box-sizing: border-box;
-}
+@import "assets/css/theme/_button.css";
+@import "assets/css/theme/_item.css";
 
-html,
-body {
-  width: 100%;
-  min-height: 100%;
-  font-size: 1.2rem;
-  font-family: "Hiragino Kaku Gothic ProN", Meiryo, sans-serif;
-}
-body {
-  position: fixed;
-  top: 0;
-}
+@import "assets/css/mat/mat-dialog.css";
+@import "assets/css/mat/mat-icon.css";
+@import "assets/css/mat/mat-select.css";
 
-/*Flex */
-.flex {
-  display: flex;
-}
-
-.flex.straight-flex {
-  flex-direction: column;
-}
-
-.flex.space-between {
-  justify-content: space-between;
-}
-
-.flex.center {
-  justify-content: center;
-}
-
-.flex.flex-end {
-  justify-content: flex-end;
-}
-
-.flex.align-center {
-  align-items: center;
-}
-
-/*Info*/
-.w50 {
-  width: 50%;
-}
-.w40 {
-  width: 40%;
-}
-.w35 {
-  width: 35%;
-}
-.w30 {
-  width: 30%;
-}
-.w20 {
-  width: 20%;
-}
-.w10 {
-  width: 10%;
-}
-.w5 {
-  width: 5%;
-}
+@import "assets/css/_helper.css";

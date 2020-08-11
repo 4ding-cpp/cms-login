@@ -14,7 +14,6 @@ export class CaptchaService {
   constructor(private reCaptchaV3Service: ReCaptchaV3Service) {}
 
   nextCaptcha(captcha: ILogin) {
-    console.log("captcha next", captcha);
     this.captchaSubject.next(captcha);
   }
 

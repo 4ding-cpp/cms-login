@@ -1,0 +1,41 @@
+.button {
+  padding: 0;
+  display: flex;
+  justify-content: space-between;
+}
+
+.button:hover {
+  cursor: pointer;
+}
+
+.button.disable {
+  cursor: default;
+}
+
+.button > * {
+  margin: auto 0;
+}
+
+.button.auto > * {
+  margin: auto;
+}
+
+button > *.mat-icon {
+  width: 20px;
+  height: 20px;
+  margin-left: 5px;
+}
+
+/* calc */
+button.calc {
+  width: 35px;
+  height: 25px;
+  display: flex;
+  margin: 0 5px;
+}
+
+button.calc > *.mat-icon {
+  width: 20px;
+  height: 20px;
+  margin: auto;
+}

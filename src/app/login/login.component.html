@@ -9,7 +9,7 @@
           <button (click)="checkAccount()">Next</button>
         </ng-container>
         <ng-container *ngIf="isLoading === 'account'">
-          Loading...
+          <app-mask-load></app-mask-load>
         </ng-container>
       </div>
     </form>
@@ -24,7 +24,7 @@
           <button (click)="checkLogin()">Login</button>
         </ng-container>
         <ng-container *ngIf="isLoading === 'password'">
-          Loading...
+          <app-mask-load></app-mask-load>
         </ng-container>
       </div>
     </form>

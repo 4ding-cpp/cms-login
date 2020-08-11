@@ -52,9 +52,12 @@ export class DataService {
 
   connect(vf: string, body: ILogin, url: string): Observable<IRes> {
     let u = `${url}?vf=${vf}`;
+    this.logger.print("http url", u);
+    this.logger.print("http body", body);
+    
     return this.http.post(u, body, this.options).pipe(
       map((res: HttpResponse<string>) => {
-        this.logger.print("response", res);
+        this.logger.print("http response", res);
         if (res.status !== 200) return "";
         return JSON.parse(res.body);
       })

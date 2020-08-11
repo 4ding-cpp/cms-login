@@ -1,4 +1,4 @@
 export const ICONS = [
-  { tab: "copyright", path: "assets/icons/copyright.svg" },
-  { tab: "alert", path: "assets/icons/alert_02.svg" },
+  { tab: "copyright", path: "assets/icon/copyright.svg" },
+  { tab: "alert", path: "assets/icon/alert_02.svg" },
 ];

@@ -1,0 +1,68 @@
+.mat-dialog-actions,
+.mat-dialog-title,
+.mat-dialog-content {
+  margin: 0 !important;
+  font-size: 0.9rem;
+}
+
+.mat-dialog-title {
+  background-color: #444054;
+  color: #fff;
+  height: 45px;
+  display: -webkit-box !important;
+  display: -webkit-flex !important;
+  display: -ms-flexbox !important;
+  display: -moz-box !important;
+  display: -moz-flex !important;
+  display: flex !important;
+  justify-content: center !important;
+}
+
+.mat-dialog-title > * {
+  margin: auto 2px;
+}
+
+.mat-dialog-title .mat-icon {
+  width: 30px;
+  height: 30px;
+}
+
+.mat-dialog-content {
+  min-height: 35px !important;
+  padding: 5px 20px !important;
+  display: flex !important;
+}
+
+.mat-dialog-content > * {
+  width: 100%;
+}
+
+.mat-dialog-content *.item-text {
+  margin-bottom: 10px;
+}
+
+mat-dialog-container.mat-dialog-container {
+  border-radius: 10px !important;
+  padding: 0 !important;
+}
+
+.mat-dialog-actions {
+  border-top: 2px solid #bfbfbf;
+  background-color: #fff;
+  display: flex;
+  justify-content: center;
+  padding: 0 !important;
+}
+.mat-dialog-actions .mat-button,
+.mat-flat-button,
+.mat-icon-button,
+.mat-stroked-button,
+.mat-dialog-actions .button {
+  line-height: 30px;
+  border-radius: 5px;
+  padding: 2px 20px;
+}
+
+.mat-dialog-actions .button:first-child {
+  margin-right: 20px;
+}
