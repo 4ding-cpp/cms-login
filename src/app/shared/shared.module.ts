@@ -5,6 +5,7 @@ import { ValidationModule } from "./validation/validation.module";
 import { DialogModule } from "./dialog/dialog.module";
 import { TranslateModule } from "@ngx-translate/core";
 import { MateriaModule } from "./materia.module";
+import { NgxCaptchaModule } from 'ngx-captcha';
 
 @NgModule({
   imports: [
@@ -15,6 +16,7 @@ import { MateriaModule } from "./materia.module";
     ValidationModule,
     TranslateModule,
     MateriaModule,
+    NgxCaptchaModule
   ],
   exports: [
     CommonModule,
@@ -24,6 +26,7 @@ import { MateriaModule } from "./materia.module";
     ValidationModule,
     TranslateModule,
     MateriaModule,
+    NgxCaptchaModule
   ],
   declarations: [],
 })

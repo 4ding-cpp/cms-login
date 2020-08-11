@@ -1,13 +1,10 @@
-import { Component, ViewChild } from "@angular/core";
+import { Component } from "@angular/core";
 import { MatIconRegistry, MatDialog } from "@angular/material";
 import { DomSanitizer } from "@angular/platform-browser";
 import { COPYRIGHT, LoginImg, LogoImg } from "./config/config";
-import { DialogAlertComponent } from "./shared/dialog/alert/dialog-alert.component";
 import { AppService } from "./app.service";
 import { UrlService } from "./service/url.service";
 import { ICONS } from "./config";
-import { MainComponent } from "./main/main.component";
-import { DataService } from "./service/data.service";
 
 @Component({
   selector: "app-root",
@@ -15,10 +12,8 @@ import { DataService } from "./service/data.service";
   styleUrls: ["./app.component.css"],
 })
 export class AppComponent {
-  @ViewChild(MainComponent, { static: false })
-  childComp: MainComponent;
   LoginImg = LoginImg;
-  LogoImg = LogoImg
+  LogoImg = LogoImg;
   COPYRIGHT = COPYRIGHT;
   isLocal = false;
 
@@ -27,8 +22,7 @@ export class AppComponent {
     private domSanitizer: DomSanitizer,
     private service: AppService,
     public dialog: MatDialog,
-    private urlService: UrlService,
-    private dataService: DataService
+    private urlService: UrlService
   ) {
     ICONS.forEach((val) => {
       this.matIconRegistry.addSvgIcon(
@@ -39,23 +33,6 @@ export class AppComponent {
   }
 
   ngOnInit() {}
-
-  login() {
-    let o = this.childComp.getLogin();
-    this.dataService.connectLogin(o).subscribe((res: Response) => {
-      console.log(666, res);
-      //token set
-    });
-  }
-
-  dialogOpen(errorcode: number) {
-    this.dialog.open(DialogAlertComponent, {
-      width: "300px",
-      data: {
-        errorcode: errorcode,
-      },
-    });
-  }
 
   setLocalCMS() {
     this.isLocal = !this.isLocal;

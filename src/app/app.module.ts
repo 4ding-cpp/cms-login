@@ -7,16 +7,14 @@ import { AppService } from "./app.service";
 import { RouterModule } from "@angular/router";
 import { TranslateLoader, TranslateModule } from "@ngx-translate/core";
 import { TranslateHttpLoader } from "@ngx-translate/http-loader";
-import { UrlService } from "./service/url.service";
-import { LoggerService } from "./service/logger.service";
-import { MainComponent } from "./main/main.component";
+import { LoginComponent } from "./login/login.component";
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, "./assets/i18n/", ".json");
 }
 
 @NgModule({
-  declarations: [AppComponent, MainComponent],
+  declarations: [AppComponent, LoginComponent],
   imports: [
     BrowserAnimationsModule,
     HttpClientModule,

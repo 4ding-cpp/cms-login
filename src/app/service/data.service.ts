@@ -1,48 +1,65 @@
 import { Injectable } from "@angular/core";
 import { LoggerService } from "./logger.service";
-import { ApiUrl, LOCALCMS, CheckUrl, LoginUrl } from "../config";
+import { CheckUrl, LoginUrl } from "../config";
 import { Observable } from "rxjs/internal/Observable";
-import { HttpHeaders, HttpClient } from "@angular/common/http";
+import { HttpClient, HttpHeaders, HttpResponse } from "@angular/common/http";
 import { map } from "rxjs/operators";
 
 export interface ILogin {
-  token?: string;
-  account?: string;
   password?: string;
+  phone?: string;
+  email?: string;
+  phoneToken?: string;
+  emailToken?: string;
+  loginToken?: string;
+  accountVF?: string;
+  passwordVF?: string;
 }
 
 @Injectable({
   providedIn: "root",
 })
 export class DataService {
-  headers = new HttpHeaders().set("Content-Type", "text/plain; charset=utf-8");
+  headers = new HttpHeaders({
+    "Content-Type": "text/json",
+  });
+  options = {
+    headers: this.headers,
+    observe: "response" as "response",
+    responseType: "text" as "text",
+  };
 
   constructor(private logger: LoggerService, private http: HttpClient) {}
 
-  connectLogin(obj: ILogin): Observable<Response> {
+  connectLogin(obj: ILogin): Observable<HttpResponse<string>> {
     let body = {
+      email: obj.phoneToken || obj.emailToken || "",
       password: obj.password || "",
-      token: obj.token || "",
     };
-    return this.connect(body, LoginUrl);
+    return this.connect(obj.passwordVF, body, LoginUrl);
   }
 
-  connectCheck(account: string): Observable<Response> {
+  connectCheck(obj: ILogin): Observable<HttpResponse<string>> {
     let body = {
-      account: account,
+      phone: obj.phone || "",
+      email: obj.email || "",
     };
-    return this.connect(body, CheckUrl);
+    return this.connect(obj.accountVF, body, CheckUrl);
   }
 
-  connect(body: ILogin, url: string): Observable<Response> {
-    return this.http
-      .post(CheckUrl, JSON.stringify(body), {
-        headers: this.headers,
+  connect(
+    vf: string,
+    body: ILogin,
+    url: string
+  ): Observable<HttpResponse<string>> {
+    let u = `${url}?vf=${vf}`;
+    //let headers = { "content-type": "application/json" };
+    let b = JSON.stringify(body);
+    console.log(u);
+    return this.http.post(u, b, this.options).pipe(
+      map((res: HttpResponse<string>) => {
+        return res;
       })
-      .pipe(
-        map((res: Response) => {
-          return res;
-        })
-      );
+    );
   }
 }

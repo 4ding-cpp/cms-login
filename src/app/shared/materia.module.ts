@@ -6,6 +6,8 @@ import {
   MatButtonModule,
   MatIconModule,
   MatRadioModule,
+  MatFormFieldModule,
+  MatInputModule
 } from "@angular/material";
 
 @NgModule({
@@ -16,6 +18,8 @@ import {
     MatButtonModule,
     MatIconModule,
     MatRadioModule,
+    MatFormFieldModule,
+    MatInputModule
   ],
   exports: [
     MatStepperModule,
@@ -24,6 +28,8 @@ import {
     MatButtonModule,
     MatIconModule,
     MatRadioModule,
+    MatFormFieldModule,
+    MatInputModule
   ],
   declarations: [],
 })

@@ -1,0 +1,7 @@
+{
+  "/sign/": {
+    "target": "https://store.4ding.site",
+    "secure": false,
+    "changeOrigin": true
+  }
+}
