@@ -1,23 +1,4 @@
 <mat-vertical-stepper [linear]="true" #stepper>
-  <mat-step [stepControl]="identityFormGroup">
-    <form [formGroup]="identityFormGroup">
-      <ng-template matStepLabel>
-        Select Identity
-      </ng-template>
-      <mat-radio-group formControlName="identity">
-        <mat-radio-button value="business">
-          <span>{{ "業主" | translate }}</span>
-        </mat-radio-button>
-        <mat-radio-button value="store">
-          <span>{{ "店家" | translate }}</span>
-        </mat-radio-button>
-      </mat-radio-group>
-      <div>
-        <button matStepperPrevious>Back</button>
-        <button matStepperNext>Next</button>
-      </div>
-    </form>
-  </mat-step>
   <mat-step [stepControl]="accountFormGroup">
     <form [formGroup]="accountFormGroup">
       <ng-template matStepLabel>Fill out your account</ng-template>

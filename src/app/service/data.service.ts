@@ -10,10 +10,13 @@ export interface ILogin {
   phone?: string;
   email?: string;
   accountToken?: string;
-  loginToken?: string;
   accountVF?: string;
   passwordVF?: string;
-  errorcode?: number;
+}
+
+export interface IRes {
+  code: number;
+  value: string;
 }
 
 @Injectable({
@@ -31,7 +34,7 @@ export class DataService {
 
   constructor(private logger: LoggerService, private http: HttpClient) {}
 
-  connectLogin(obj: ILogin): Observable<string> {
+  connectLogin(obj: ILogin): Observable<IRes> {
     let body = {
       email: obj.accountToken || "",
       password: obj.password || "",
@@ -39,7 +42,7 @@ export class DataService {
     return this.connect(obj.passwordVF, body, LoginUrl);
   }
 
-  connectCheck(obj: ILogin): Observable<string> {
+  connectCheck(obj: ILogin): Observable<IRes> {
     let body = {
       phone: obj.phone || "",
       email: obj.email || "",
@@ -47,13 +50,13 @@ export class DataService {
     return this.connect(obj.accountVF, body, CheckUrl);
   }
 
-  connect(vf: string, body: ILogin, url: string): Observable<string> {
+  connect(vf: string, body: ILogin, url: string): Observable<IRes> {
     let u = `${url}?vf=${vf}`;
     return this.http.post(u, body, this.options).pipe(
       map((res: HttpResponse<string>) => {
         this.logger.print("response", res);
         if (res.status !== 200) return "";
-        return res.body;
+        return JSON.parse(res.body);
       })
     );
   }

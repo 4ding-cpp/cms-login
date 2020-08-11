@@ -1,7 +1,6 @@
 import { Component, Inject, OnInit } from "@angular/core";
 import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material/dialog";
 import { filter, take } from "rxjs/operators";
-import { ErrorCodeMsg } from "../../../config";
 
 @Component({
   selector: "share-dialog-alert",
@@ -9,11 +8,11 @@ import { ErrorCodeMsg } from "../../../config";
   styleUrls: ["./dialog-alert.component.css"],
 })
 export class DialogAlertComponent implements OnInit {
-  private ErrorCodeMsg = ErrorCodeMsg;
+  msg = "";
 
   constructor(
     public dialogRef: MatDialogRef<DialogAlertComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: { errorcode: number }
+    @Inject(MAT_DIALOG_DATA) public data: { msg: string }
   ) {}
 
   ngOnInit() {
@@ -26,14 +25,9 @@ export class DialogAlertComponent implements OnInit {
       .subscribe(() => {
         this.dialogRef.close();
       });
-  }
 
-  getMsgName(): string {
-    if (!!this.data) {
-      let result = this.ErrorCodeMsg.filter(
-        (item) => item.code === this.data.errorcode
-      );
-      return !!result.length ? result[0].name : "err_fail";
+    if (!!this.data && !!this.data.msg) {
+      this.msg = this.data.msg;
     }
   }
 }

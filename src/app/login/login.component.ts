@@ -1,13 +1,13 @@
 import { Component, ViewChild, OnInit, OnDestroy } from "@angular/core";
 import { Validators, FormGroup, FormBuilder } from "@angular/forms";
 import { MatDialog, MatStepper } from "@angular/material";
-import { ILogin, DataService } from "../service/data.service";
+import { ILogin, DataService, IRes } from "../service/data.service";
 import { CaptchaService } from "../service/captcha.service";
 import { Subscription } from "rxjs/internal/Subscription";
 import { UrlService } from "../service/url.service";
 import { DialogAlertComponent } from "../shared/dialog/alert/dialog-alert.component";
 import { DialogWidth } from "../config";
-import { HttpResponse } from "@angular/common/http";
+import { ErrorCodeService } from "../service/errorcode.service";
 
 @Component({
   selector: "app-login",
@@ -26,9 +26,10 @@ export class LoginComponent implements OnInit, OnDestroy {
   constructor(
     private fb: FormBuilder,
     public dialog: MatDialog,
-    private captcha: CaptchaService,
     private urlService: UrlService,
-    private dataService: DataService
+    private dataService: DataService,
+    private captcha: CaptchaService,
+    private errorcodeService: ErrorCodeService
   ) {}
 
   ngOnInit() {
@@ -39,7 +40,6 @@ export class LoginComponent implements OnInit, OnDestroy {
         .isCaptchaIn()
         .subscribe((token: ILogin) => {
           this.token = { ...this.token, ...token };
-          this.isLoading = "";
           if (!!this.accountFormGroup && !!this.token.accountVF) {
             this.setAccountToken();
           }
@@ -56,7 +56,6 @@ export class LoginComponent implements OnInit, OnDestroy {
       phone: "",
       email: "",
       accountToken: "",
-      loginToken: "",
       accountVF: "",
       passwordVF: "",
     };
@@ -69,9 +68,6 @@ export class LoginComponent implements OnInit, OnDestroy {
   }
 
   createForm() {
-    this.identityFormGroup = this.fb.group({
-      identity: ["store", Validators.required],
-    });
     this.accountFormGroup = this.fb.group({
       account: ["", Validators.required],
     });
@@ -94,9 +90,17 @@ export class LoginComponent implements OnInit, OnDestroy {
   }
 
   setAccountToken() {
-    this.dataService.connectCheck(this.token).subscribe((token: string) => {
-      console.log("account token", token);
-      this.token.accountToken = token
+    this.dataService.connectCheck(this.token).subscribe((res: IRes) => {
+      this.isLoading = "";
+      if (!!res.code) {
+        this.errorcodeService.setMsg(res.code, res.value);
+        let errorName = this.errorcodeService.getMsgName(res.code);
+        this.accountFormGroup.controls.account.setErrors({
+          [errorName]: true,
+        });
+        return;
+      }
+      this.token.accountToken = res.value;
       this.stepper.next();
     });
   }
@@ -109,21 +113,18 @@ export class LoginComponent implements OnInit, OnDestroy {
   }
 
   login() {
-    this.dataService.connectLogin(this.token).subscribe((token: string) => {
-      if(!token) this.dialogOpen(1);
-      this.token.loginToken = token
-      //login access
-      this.urlService.setIdentity(this.identityFormGroup.value.identity)
-      window.location.href = this.urlService.cmsUrl(token);
-    });
-  }
-
-  dialogOpen(errorcode: number) {
-    this.dialog.open(DialogAlertComponent, {
-      width: DialogWidth,
-      data: {
-        errorcode: errorcode,
-      },
+    this.dataService.connectLogin(this.token).subscribe((res: IRes) => {
+      this.isLoading = "";
+      if (!!res.code) {
+        let code = res.code + 5;
+        this.errorcodeService.setMsg(code, res.value);
+        let errorName = this.errorcodeService.getMsgName(code);
+        this.passwordFormGroup.controls.password.setErrors({
+          [errorName]: true,
+        });
+        return;
+      }
+      window.location.href = this.urlService.cmsUrl(res.value);
     });
   }
 }
