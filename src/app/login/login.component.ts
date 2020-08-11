@@ -1,12 +1,15 @@
 import { Component, ViewChild, OnInit, OnDestroy } from "@angular/core";
-import { Validators, FormGroup, FormBuilder, FormControl } from "@angular/forms";
+import {
+  Validators,
+  FormGroup,
+  FormBuilder,
+  FormControl,
+} from "@angular/forms";
 import { MatDialog, MatStepper } from "@angular/material";
 import { ILogin, DataService, IRes } from "../service/data.service";
 import { CaptchaService } from "../service/captcha.service";
 import { Subscription } from "rxjs/internal/Subscription";
 import { UrlService } from "../service/url.service";
-import { DialogAlertComponent } from "../shared/dialog/alert/dialog-alert.component";
-import { DialogWidth } from "../config";
 import { ErrorCodeService } from "../service/errorcode.service";
 
 @Component({
@@ -22,6 +25,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   passwordFormGroup: FormGroup;
   token: ILogin = null;
   isLoading = "";
+  isCompleted = false;
 
   constructor(
     private fb: FormBuilder,
@@ -101,7 +105,12 @@ export class LoginComponent implements OnInit, OnDestroy {
         return;
       }
       this.token.accountToken = res.value;
-      this.stepper.next();
+      this.isCompleted = true;
+      if (this.isCompleted) {
+        this.isCompleted = true;
+        this.stepper.selected.completed = true;
+        this.stepper.next();
+      }
     });
   }
 
@@ -128,7 +137,11 @@ export class LoginComponent implements OnInit, OnDestroy {
     });
   }
 
-  resetCol(ipContent: FormControl) {
+  resetCol(ipContent: FormControl, isAccount = false) {
     ipContent.setValue("");
+    if (isAccount) {
+      this.isCompleted = false;
+      this.token.accountToken = "";
+    }
   }
 }

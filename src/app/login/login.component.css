@@ -1,7 +1,7 @@
 .item-box {
   display: flex;
   flex-direction: column;
-  font-size: 1rem;
+  font-size: 0.8rem;
 }
 
 .item-box > * {
@@ -14,5 +14,10 @@
 }
 
 button {
-  margin-right: 10px;
+  width: 100%;
+}
+
+.item-text.mb10 > *:first-child,
+.item-row.mb10 {
+  margin-bottom: 0;
 }

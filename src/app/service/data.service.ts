@@ -54,7 +54,7 @@ export class DataService {
     let u = `${url}?vf=${vf}`;
     this.logger.print("http url", u);
     this.logger.print("http body", body);
-    
+
     return this.http.post(u, body, this.options).pipe(
       map((res: HttpResponse<string>) => {
         this.logger.print("http response", res);

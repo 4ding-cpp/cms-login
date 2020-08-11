@@ -1,5 +1,5 @@
 <mat-vertical-stepper [linear]="true" #stepper>
-  <mat-step [stepControl]="accountFormGroup">
+  <mat-step [completed]="isCompleted">
     <form [formGroup]="accountFormGroup">
       <ng-template matStepLabel>Fill out your account</ng-template>
       <div class="item-box">
@@ -12,7 +12,7 @@
             />
             <mat-icon
               *ngIf="accountFormGroup.controls.account.value != ''"
-              (click)="resetCol(accountFormGroup.controls.account)"
+              (click)="resetCol(accountFormGroup.controls.account, true)"
               svgIcon="cancel"
             ></mat-icon>
           </div>
@@ -21,13 +21,17 @@
           ></validation-messages>
         </div>
         <div>
-          <button class="button pd-10 bg-brick" matStepperPrevious>
-            <span>{{ "back" | translate }}</span>
-          </button>
           <ng-container *ngIf="isLoading !== 'account'">
-            <button class="button pd-10 bg-brick" (click)="checkAccount()">
-              <span>{{ "next" | translate }}</span>
-            </button>
+            <ng-container *ngIf="!token.accountToken">
+              <button class="button bg-brick auto" (click)="checkAccount()">
+                <span>{{ "next" | translate }}</span>
+              </button>
+            </ng-container>
+            <ng-container *ngIf="!!token.accountToken">
+              <button class="button bg-brick auto" matStepperNext>
+                <span>{{ "next" | translate }}</span>
+              </button>
+            </ng-container>
           </ng-container>
           <ng-container *ngIf="isLoading === 'account'">
             <app-mask-load></app-mask-load>
@@ -36,7 +40,7 @@
       </div>
     </form>
   </mat-step>
-  <mat-step [stepControl]="passwordFormGroup">
+  <mat-step [completed]="!!passwordFormGroup.value.password">
     <form [formGroup]="passwordFormGroup">
       <ng-template matStepLabel>Fill out your password</ng-template>
       <div class="item-box">
@@ -58,11 +62,20 @@
           ></validation-messages>
         </div>
         <div>
-          <button class="button pd-10 bg-brick" matStepperPrevious>
+          <button
+            class="button bg-brick auto"
+            style="margin-right: 10px;"
+            matStepperPrevious
+          >
             <span>{{ "back" | translate }}</span>
           </button>
           <ng-container *ngIf="isLoading !== 'password'">
-            <button class="button pd-10 bg-brick" (click)="checkLogin()">
+            <button
+              class="button bg-brick auto"
+              (click)="checkLogin()"
+              [disabled]="!passwordFormGroup.valid"
+              [ngClass]="{ disable: !passwordFormGroup.valid }"
+            >
               <span>{{ "login" | translate }}</span>
             </button>
           </ng-container>
