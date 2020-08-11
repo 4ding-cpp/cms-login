@@ -1,5 +1,5 @@
 import { Component, ViewChild, OnInit, OnDestroy } from "@angular/core";
-import { Validators, FormGroup, FormBuilder } from "@angular/forms";
+import { Validators, FormGroup, FormBuilder, FormControl } from "@angular/forms";
 import { MatDialog, MatStepper } from "@angular/material";
 import { ILogin, DataService, IRes } from "../service/data.service";
 import { CaptchaService } from "../service/captcha.service";
@@ -126,5 +126,9 @@ export class LoginComponent implements OnInit, OnDestroy {
       }
       window.location.href = this.urlService.cmsUrl(res.value);
     });
+  }
+
+  resetCol(ipContent: FormControl) {
+    ipContent.setValue("");
   }
 }

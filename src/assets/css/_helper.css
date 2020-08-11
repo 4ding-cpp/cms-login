@@ -1,3 +1,11 @@
 .hand {
   cursor: pointer;
 }
+
+.mat-vertical-content {
+  padding: 0 24px 0 24px !important;
+}
+
+.mat-vertical-stepper-header {
+  padding: 24px 0 !important;
+}

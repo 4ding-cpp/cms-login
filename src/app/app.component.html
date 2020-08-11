@@ -6,14 +6,24 @@
         <img [src]="LogoImg" alt="logo" />
       </div>
       <div class="footer">
+        <mat-icon svgIcon="copyright" class="icon-15"></mat-icon>
         <span>{{ COPYRIGHT }}</span>
       </div>
     </div>
     <div class="main">
-      <div class="option">
-        <span>{{ "Welcome to Back" }}</span>
+      <div>
+        <div class="option">
+          <span>{{ "Welcome back" }}</span>
+        </div>
+        <div>
+          <app-login></app-login>
+        </div>
       </div>
-      <app-login></app-login>
+      <div>
+        <span>
+          當你註冊開店，即表示你已同意 4ding 隱私權政策與會員條款。
+        </span>
+      </div>
     </div>
   </mat-card>
 </div>

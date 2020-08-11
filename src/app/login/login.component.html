@@ -2,30 +2,74 @@
   <mat-step [stepControl]="accountFormGroup">
     <form [formGroup]="accountFormGroup">
       <ng-template matStepLabel>Fill out your account</ng-template>
-      <input placeholder="import_account" formControlName="account" />
-      <div>
-        <button matStepperPrevious>Back</button>
-        <ng-container *ngIf="isLoading !== 'account'">
-          <button (click)="checkAccount()">Next</button>
-        </ng-container>
-        <ng-container *ngIf="isLoading === 'account'">
-          <app-mask-load></app-mask-load>
-        </ng-container>
+      <div class="item-box">
+        <div class="item-text mb10">
+          <div></div>
+          <div class="item-row set-ipt">
+            <input
+              formControlName="account"
+              [placeholder]="'import_account' | translate"
+            />
+            <mat-icon
+              *ngIf="accountFormGroup.controls.account.value != ''"
+              (click)="resetCol(accountFormGroup.controls.account)"
+              svgIcon="cancel"
+            ></mat-icon>
+          </div>
+          <validation-messages
+            [control]="accountFormGroup.controls.account"
+          ></validation-messages>
+        </div>
+        <div>
+          <button class="button pd-10 bg-brick" matStepperPrevious>
+            <span>{{ "back" | translate }}</span>
+          </button>
+          <ng-container *ngIf="isLoading !== 'account'">
+            <button class="button pd-10 bg-brick" (click)="checkAccount()">
+              <span>{{ "next" | translate }}</span>
+            </button>
+          </ng-container>
+          <ng-container *ngIf="isLoading === 'account'">
+            <app-mask-load></app-mask-load>
+          </ng-container>
+        </div>
       </div>
     </form>
   </mat-step>
   <mat-step [stepControl]="passwordFormGroup">
     <form [formGroup]="passwordFormGroup">
       <ng-template matStepLabel>Fill out your password</ng-template>
-      <input placeholder="import_password" formControlName="password" />
-      <div>
-        <button matStepperPrevious>Back</button>
-        <ng-container *ngIf="isLoading !== 'password'">
-          <button (click)="checkLogin()">Login</button>
-        </ng-container>
-        <ng-container *ngIf="isLoading === 'password'">
-          <app-mask-load></app-mask-load>
-        </ng-container>
+      <div class="item-box">
+        <div class="item-text mb10">
+          <div></div>
+          <div class="item-row set-ipt">
+            <input
+              formControlName="password"
+              [placeholder]="'import_password' | translate"
+            />
+            <mat-icon
+              *ngIf="passwordFormGroup.controls.password.value != ''"
+              (click)="resetCol(passwordFormGroup.controls.password)"
+              svgIcon="cancel"
+            ></mat-icon>
+          </div>
+          <validation-messages
+            [control]="passwordFormGroup.controls.password"
+          ></validation-messages>
+        </div>
+        <div>
+          <button class="button pd-10 bg-brick" matStepperPrevious>
+            <span>{{ "back" | translate }}</span>
+          </button>
+          <ng-container *ngIf="isLoading !== 'password'">
+            <button class="button pd-10 bg-brick" (click)="checkLogin()">
+              <span>{{ "login" | translate }}</span>
+            </button>
+          </ng-container>
+          <ng-container *ngIf="isLoading === 'password'">
+            <app-mask-load></app-mask-load>
+          </ng-container>
+        </div>
       </div>
     </form>
   </mat-step>
