@@ -4,14 +4,14 @@ import { CoreComponent } from "./core.component";
 
 const routes: Routes = [
   {
-    path: "login",
+    path: "",
     component: CoreComponent,
-  },
-  { path: "", redirectTo: "login", pathMatch: "full" },
+  }
+  // { path: "", redirectTo: "login", pathMatch: "full" },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class CoreRoutingModule {}
+export class CoreRoutingModule { }
