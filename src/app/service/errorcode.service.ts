@@ -5,7 +5,7 @@ import { Injectable } from "@angular/core";
   frond code:101~
 */
 export interface IErrorCode {
-  code: number;
+  code: number; 
   name: string;
   msg?: string;
 }
