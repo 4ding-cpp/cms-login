@@ -8,11 +8,11 @@ import { filter, take } from "rxjs/operators";
   styleUrls: ["./dialog-alert.component.css"],
 })
 export class DialogAlertComponent implements OnInit {
-  msg = "";
+  errorName = "";
 
   constructor(
     public dialogRef: MatDialogRef<DialogAlertComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: { msg: string }
+    @Inject(MAT_DIALOG_DATA) public data: { errorName: string }
   ) {}
 
   ngOnInit() {
@@ -26,8 +26,8 @@ export class DialogAlertComponent implements OnInit {
         this.dialogRef.close();
       });
 
-    if (!!this.data && !!this.data.msg) {
-      this.msg = this.data.msg;
+    if (!!this.data && !!this.data.errorName) {
+      this.errorName = this.data.errorName;
     }
   }
 }
