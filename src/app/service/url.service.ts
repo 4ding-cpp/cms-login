@@ -29,10 +29,9 @@ export class UrlService {
   }
 
   cmsUrl(token: string): string {
-    //let url = `${this.protocal}//${this.identity}.${ApiUrl}?token=${token}`;
-    let url = `?token=${token}`
+    let url = `${this.protocal}//store.${ApiUrl}/cms?token=${token}`;
     if (this.localCMS) {
-      url = `http://${LOCALCMS}?token=${token}`;
+      url = `http://${LOCALCMS}/cms?token=${token}`;
     }
     this.logger.print("CMS", url);
     return url;

@@ -67,14 +67,14 @@
           ></validation-messages>
         </div>
         <div>
-          <button
-            class="button bg-brick auto"
-            style="margin-right: 10px;"
-            matStepperPrevious
-          >
-            <span>{{ "back" | translate }}</span>
-          </button>
           <ng-container *ngIf="isLoading !== 'password'">
+            <button
+              class="button bg-brick auto"
+              style="margin-right: 10px;"
+              matStepperPrevious
+            >
+              <span>{{ "back" | translate }}</span>
+            </button>
             <button
               class="button bg-brick auto"
               (click)="checkLogin()"
