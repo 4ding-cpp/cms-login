@@ -7,9 +7,8 @@ export const TOGGLELANG = true;
 export const DialogWidth = "350px";
 export const COPYRIGHT = "4DingSite-Team";
 
-export const ApiUrl = "4ding.site";
-export const CheckUrl = "/sign/check";
-export const LoginUrl = "/sign/in";
+export const APICheckUrl = "/sign/check";
+export const APILoginUrl = "/sign/in";
 export const LOCALCMS = "localhost:4200";
 
 export const LoginImg = "assets/img/login.png";

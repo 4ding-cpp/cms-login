@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { LoggerService } from "./logger.service";
-import { CheckUrl, LoginUrl } from "../config";
+import { APICheckUrl, APILoginUrl } from "../config";
 import { Observable } from "rxjs/internal/Observable";
 import { HttpClient, HttpHeaders, HttpResponse } from "@angular/common/http";
 import { map } from "rxjs/operators";
@@ -39,7 +39,7 @@ export class DataService {
       email: obj.accountToken || "",
       password: obj.password || "",
     };
-    return this.connect(obj.passwordVF, body, LoginUrl);
+    return this.connect(obj.passwordVF, body, APILoginUrl);
   }
 
   connectCheck(obj: ILogin): Observable<IRes> {
@@ -47,7 +47,7 @@ export class DataService {
       phone: obj.phone || "",
       email: obj.email || "",
     };
-    return this.connect(obj.accountVF, body, CheckUrl);
+    return this.connect(obj.accountVF, body, APICheckUrl);
   }
 
   connect(vf: string, body: ILogin, url: string): Observable<IRes> {

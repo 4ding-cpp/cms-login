@@ -1,12 +1,11 @@
 import { Injectable } from "@angular/core";
 import { LoggerService } from "./logger.service";
-import { ApiUrl, LOCALCMS } from "../config";
+import { LOCALCMS } from "../config";
 
 @Injectable({
   providedIn: "root",
 })
 export class UrlService {
-  ApiUrl = ApiUrl;
   LOCALCMS = LOCALCMS;
   host = "";
   protocal = "";
@@ -29,7 +28,7 @@ export class UrlService {
   }
 
   cmsUrl(token: string): string {
-    let url = `${this.protocal}//store.${ApiUrl}/cms?token=${token}`;
+    let url = `/?token=${token}`;
     if (this.localCMS) {
       url = `http://${LOCALCMS}/cms?token=${token}`;
     }
