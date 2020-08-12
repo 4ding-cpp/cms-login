@@ -3,7 +3,7 @@ import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material/dialog";
 import { filter, take } from "rxjs/operators";
 
 @Component({
-  selector: "share-dialog-alert",
+  selector: "dialog-alert",
   templateUrl: "./dialog-alert.component.html",
   styleUrls: ["./dialog-alert.component.css"],
 })

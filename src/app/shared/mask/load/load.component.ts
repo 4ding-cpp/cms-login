@@ -5,7 +5,7 @@ import { State } from "../mask";
 import { MaskService } from "../mask.service";
 
 @Component({
-  selector: "app-mask-load",
+  selector: "mask-load",
   templateUrl: "./load.component.html",
   styleUrls: ["./load.component.css"],
 })

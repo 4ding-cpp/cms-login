@@ -9,7 +9,14 @@ import { MatIconRegistry, MatDialog } from "@angular/material";
 import { DomSanitizer } from "@angular/platform-browser";
 import { AppService } from "./app.service";
 import { UrlService } from "./service/url.service";
-import { ICONS, TOGGLELANG, COPYRIGHT, LoginImg, LogoImg, LANG } from "./config";
+import {
+  ICONS,
+  TOGGLELANG,
+  COPYRIGHT,
+  LoginImg,
+  LogoImg,
+  LANG,
+} from "./config";
 import {
   ConnectedPosition,
   Overlay,
@@ -19,6 +26,7 @@ import {
 } from "@angular/cdk/overlay";
 import { TemplatePortal } from "@angular/cdk/portal";
 import { Subscription } from "rxjs/internal/Subscription";
+import { MateriaDeviceService } from "./shared/materia/materia-device.service";
 
 @Component({
   selector: "app-root",
@@ -34,7 +42,9 @@ export class AppComponent {
   LogoImg = LogoImg;
   COPYRIGHT = COPYRIGHT;
   overlayRef: OverlayRef;
+  subscription: Subscription;
   isLocal = false;
+  device = "";
 
   constructor(
     private matIconRegistry: MatIconRegistry,
@@ -43,7 +53,8 @@ export class AppComponent {
     public dialog: MatDialog,
     private urlService: UrlService,
     private overlay: Overlay,
-    private viewContainerRef: ViewContainerRef
+    private viewContainerRef: ViewContainerRef,
+    private deviceService: MateriaDeviceService
   ) {
     ICONS.forEach((val) => {
       this.matIconRegistry.addSvgIcon(
@@ -53,7 +64,18 @@ export class AppComponent {
     });
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    if (!!this.deviceService.isDeviceIn()) {
+      this.subscription = this.deviceService
+        .isDeviceIn()
+        .subscribe((device: string) => {
+          console.log(333,this.device)
+          if (!!device) {
+            this.device = device;
+          }
+        });
+    }
+  }
 
   setLocalCMS() {
     this.isLocal = !this.isLocal;

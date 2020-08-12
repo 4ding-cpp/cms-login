@@ -5,7 +5,7 @@ import { State } from "../mask";
 import { MaskService } from "../mask.service";
 
 @Component({
-  selector: "app-mask-spinner",
+  selector: "mask-spinner",
   templateUrl: "./spinner.component.html",
   styleUrls: ["./spinner.component.css"],
 })
