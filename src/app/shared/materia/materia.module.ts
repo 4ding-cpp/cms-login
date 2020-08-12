@@ -42,5 +42,6 @@ import { MateriaDeviceService } from "./materia-device.service";
     MateriaDeviceComponent,
   ],
   declarations: [MateriaDeviceComponent],
+  providers: [MateriaDeviceService],
 })
 export class MateriaModule {}

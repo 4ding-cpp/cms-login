@@ -46,7 +46,7 @@ export class CoreComponent {
   device = "";
 
   constructor(
-    private appService: AppService,
+    public appService: AppService,
     private urlService: UrlService,
     private overlay: Overlay,
     private viewContainerRef: ViewContainerRef,
