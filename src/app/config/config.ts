@@ -1,5 +1,5 @@
 export const LANG = [
-  { long: "chiness", short: "cn" },
+  { long: "chinese", short: "cn" },
   { long: "traditional", short: "tw" },
   { long: "english", short: "en" },
 ];

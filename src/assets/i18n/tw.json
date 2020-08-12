@@ -3,9 +3,9 @@
   "all": "全部",
   "select": "請選擇",
 
-  "Chinese": "簡體中文",
-  "English": "英文",
-  "Traditional": "繁體中文",
+  "chinese": "簡體中文",
+  "english": "英文",
+  "traditional": "繁體中文",
 
   "cancel": "取消",
   "enter": "確認",
@@ -30,5 +30,5 @@
   "invalid_account": "帳號不存在",
   "invalid_password": "密碼錯誤，請再確認一次",
   "invalid_token": "Token 無效",
-  "required":"必填"
+  "required": "必填"
 }

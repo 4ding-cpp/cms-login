@@ -1,9 +1,24 @@
-import { Component } from "@angular/core";
+import {
+  Component,
+  ViewChild,
+  TemplateRef,
+  ElementRef,
+  ViewContainerRef,
+} from "@angular/core";
 import { MatIconRegistry, MatDialog } from "@angular/material";
 import { DomSanitizer } from "@angular/platform-browser";
 import { AppService } from "./app.service";
 import { UrlService } from "./service/url.service";
-import { ICONS, TOGGLELANG, COPYRIGHT, LoginImg, LogoImg } from "./config";
+import { ICONS, TOGGLELANG, COPYRIGHT, LoginImg, LogoImg, LANG } from "./config";
+import {
+  ConnectedPosition,
+  Overlay,
+  FlexibleConnectedPositionStrategyOrigin,
+  PositionStrategy,
+  OverlayRef,
+} from "@angular/cdk/overlay";
+import { TemplatePortal } from "@angular/cdk/portal";
+import { Subscription } from "rxjs/internal/Subscription";
 
 @Component({
   selector: "app-root",
@@ -11,10 +26,14 @@ import { ICONS, TOGGLELANG, COPYRIGHT, LoginImg, LogoImg } from "./config";
   styleUrls: ["./app.component.css"],
 })
 export class AppComponent {
-  TOGGLELANG = TOGGLELANG
+  @ViewChild("overlayLang", { static: false }) overlayLang: TemplateRef<any>;
+  @ViewChild("originLang", { static: false }) originLang: ElementRef;
+  TOGGLELANG = TOGGLELANG;
+  LANG = LANG;
   LoginImg = LoginImg;
   LogoImg = LogoImg;
   COPYRIGHT = COPYRIGHT;
+  overlayRef: OverlayRef;
   isLocal = false;
 
   constructor(
@@ -22,7 +41,9 @@ export class AppComponent {
     private domSanitizer: DomSanitizer,
     private service: AppService,
     public dialog: MatDialog,
-    private urlService: UrlService
+    private urlService: UrlService,
+    private overlay: Overlay,
+    private viewContainerRef: ViewContainerRef
   ) {
     ICONS.forEach((val) => {
       this.matIconRegistry.addSvgIcon(
@@ -39,7 +60,50 @@ export class AppComponent {
     this.urlService.setLocalCMS(this.isLocal);
   }
 
-  useLang(lang: string) {
+  toggleLang() {
+    let origin = this.originLang.nativeElement;
+    let position: ConnectedPosition = {
+      originX: "end",
+      originY: "bottom",
+      overlayX: "end",
+      overlayY: "top",
+    };
+    this.toggleOverlay(origin, position, this.overlayLang);
+  }
+
+  toggleOverlay(
+    origin: FlexibleConnectedPositionStrategyOrigin,
+    position: ConnectedPosition,
+    overlayList: TemplateRef<any>,
+    func?: Function
+  ) {
+    const strategy: PositionStrategy = this.overlay
+      .position()
+      .flexibleConnectedTo(origin)
+      .withPositions([position]);
+    this.overlayRef = this.overlay.create({
+      positionStrategy: strategy,
+      hasBackdrop: true,
+    });
+    if (this.overlayRef && this.overlayRef.hasAttached()) {
+      this.overlayRef.detach();
+    } else {
+      this.overlayRef.attach(
+        new TemplatePortal(overlayList, this.viewContainerRef)
+      );
+    }
+
+    let s: Subscription = this.overlayRef.backdropClick().subscribe(() => {
+      if (!!func) {
+        func();
+      }
+      this.overlayRef.dispose();
+      s.unsubscribe();
+    });
+  }
+
+  processLang(lang: string) {
     this.service.setLang(lang);
+    this.overlayRef.dispose();
   }
 }

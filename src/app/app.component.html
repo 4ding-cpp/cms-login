@@ -16,8 +16,9 @@
           <div>
             <span>{{ "welcome" | translate }}</span>
           </div>
-          <div *ngIf="TOGGLELANG" (click)="toggleLang()">
+          <div *ngIf="TOGGLELANG" #originLang (click)="toggleLang()" class="hand">
             <mat-icon svgIcon="global" class="icon-25"></mat-icon>
+            <mat-icon svgIcon="arrow_down" class="icon-15"></mat-icon>
           </div>
         </div>
         <div>
@@ -35,3 +36,24 @@
     </div>
   </mat-card>
 </div>
+
+<!--Overlay-->
+<ng-template #overlayLang>
+  <div>
+    <ng-container *ngFor="let lang of LANG">
+      <div
+        class="item-row"
+        (click)="processLang(lang.short)"
+        [ngClass]="{ active: lang.short === service.getLang() }"
+      >
+        <div>
+          <mat-icon
+            svgIcon="global_active"
+            class="icon-25"
+          ></mat-icon>
+          <span>{{ lang.long | translate }}</span>
+        </div>
+      </div>
+    </ng-container>
+  </div>
+</ng-template>

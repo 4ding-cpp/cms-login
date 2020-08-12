@@ -3,9 +3,9 @@
   "all": "all",
   "select": "select",
 
-  "Chinese": "Chinese",
-  "English": "English",
-  "Traditional": "Traditional",
+  "chinese": "Chinese",
+  "english": "English",
+  "traditional": "Traditional",
 
   "cancel": "cancel",
   "enter": "enter",
@@ -30,5 +30,5 @@
   "invalid_account": "invalid_account",
   "invalid_password": "invalid_password",
   "invalid_token": "invalid_token",
-  "required":"require"
+  "required": "require"
 }
