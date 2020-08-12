@@ -4,17 +4,20 @@ import { NgModule } from "@angular/core";
 import { AppComponent } from "./app.component";
 import { SharedModule } from "./shared/shared.module";
 import { AppService } from "./app.service";
-import { RouterModule } from "@angular/router";
 import { TranslateLoader, TranslateModule } from "@ngx-translate/core";
 import { TranslateHttpLoader } from "@ngx-translate/http-loader";
-import { LoginComponent } from "./login/login.component";
+import { AppRoutingModule } from './app-routing.module';
+import { MatIconModule } from '@angular/material';
+import { MaskModule } from './shared/mask/mask.module';
+import { DialogModule } from './shared/dialog/dialog.module';
+import { CoreModule } from "./core/core.module";
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, "./assets/i18n/", ".json");
 }
 
 @NgModule({
-  declarations: [AppComponent, LoginComponent],
+  declarations: [AppComponent],
   imports: [
     BrowserAnimationsModule,
     HttpClientModule,
@@ -25,11 +28,11 @@ export function createTranslateLoader(http: HttpClient) {
         deps: [HttpClient],
       },
     }),
-    SharedModule,
-    RouterModule.forRoot([
-      { path: "login", component: AppComponent },
-      { path: "", redirectTo: "login", pathMatch: "full" },
-    ]),
+    MatIconModule,
+    DialogModule,
+    MaskModule,
+    CoreModule,
+    AppRoutingModule
   ],
   providers: [
     { provide: "HOST", useValue: window.location.hostname },

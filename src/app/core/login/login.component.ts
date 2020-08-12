@@ -6,11 +6,11 @@ import {
   FormControl,
 } from "@angular/forms";
 import { MatDialog, MatStepper } from "@angular/material";
-import { ILogin, DataService, IRes } from "../service/data.service";
-import { CaptchaService } from "../service/captcha.service";
 import { Subscription } from "rxjs/internal/Subscription";
-import { UrlService } from "../service/url.service";
-import { ErrorCodeService } from "../service/errorcode.service";
+import { ILogin, DataService, IRes } from 'src/app/service/data.service';
+import { UrlService } from 'src/app/service/url.service';
+import { CaptchaService } from 'src/app/service/captcha.service';
+import { ErrorCodeService } from 'src/app/service/errorcode.service';
 
 @Component({
   selector: "app-login",
