@@ -4,6 +4,7 @@ import {
   FormGroup,
   FormBuilder,
   FormControl,
+  AbstractControl,
 } from "@angular/forms";
 import { MatDialog, MatStepper } from "@angular/material";
 import { Subscription } from "rxjs/internal/Subscription";
@@ -137,7 +138,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     });
   }
 
-  resetCol(ipContent: FormControl, isAccount = false) {
+  resetCol(ipContent: AbstractControl, isAccount = false) {
     ipContent.setValue("");
     if (isAccount) {
       this.isCompleted = false;
