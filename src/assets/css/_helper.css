@@ -9,3 +9,10 @@
 .mat-vertical-stepper-header {
   padding: 24px 0 !important;
 }
+
+@media screen and (max-width: 767px) {
+  .mat-stepper-horizontal,
+  .mat-stepper-vertical {
+    background-color: transparent !important;
+  }
+}

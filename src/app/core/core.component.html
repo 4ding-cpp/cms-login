@@ -1,17 +1,17 @@
 <materia-device></materia-device>
 <div class="container">
-  <mat-card>
+  <mat-card *ngIf="device !== 'mb'">
     <div class="side">
       <img [src]="LoginImg" alt="login-left" class="bg" />
       <div class="logo">
         <img [src]="LogoImg" alt="logo" />
       </div>
-      <div class="footer">
+      <footer>
         <mat-icon svgIcon="copyright" class="icon-15"></mat-icon>
         <span>{{ COPYRIGHT }}</span>
-      </div>
+      </footer>
     </div>
-    <div class="main">
+    <main>
       <div>
         <div class="option">
           <div>
@@ -39,8 +39,54 @@
           <span>{{ "terms" | translate }}</span>
         </div>
       </div>
-    </div>
+    </main>
   </mat-card>
+
+  <ng-container *ngIf="device === 'mb'">
+    <div>
+      <header>
+        <div class="logo">
+          <img [src]="LogoMBImg" alt="logo" />
+        </div>
+      </header>
+      <main>
+        <div>
+          <div class="option">
+            <div>
+              <span>{{ "welcome" | translate }}</span>
+            </div>
+            <div
+              *ngIf="TOGGLELANG"
+              #originLang
+              (click)="toggleLang()"
+              class="hand"
+            >
+              <mat-icon svgIcon="global" class="icon-25"></mat-icon>
+              <mat-icon svgIcon="arrow_down" class="icon-15"></mat-icon>
+            </div>
+          </div>
+          <div>
+            <app-login></app-login>
+          </div>
+        </div>
+        <div>
+        </div>
+      </main>
+    </div>
+
+    <footer>
+      <div>
+        <span>{{ "agree" | translate }}</span>
+        <span>{{ "policy" | translate }}</span>
+        <span>{{ "and" | translate }}</span>
+        <span>{{ "terms" | translate }}</span>
+      </div>
+      <div>
+        <mat-icon svgIcon="copyright" class="icon-15"></mat-icon>
+        <span>{{ COPYRIGHT }}</span>
+      </div>
+    </footer>
+  </ng-container>
 </div>
 
 <!--Overlay-->

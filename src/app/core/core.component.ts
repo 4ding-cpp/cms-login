@@ -15,7 +15,14 @@ import {
 import { TemplatePortal } from "@angular/cdk/portal";
 import { Subscription } from "rxjs/internal/Subscription";
 import { MateriaDeviceService } from "../shared/materia/materia-device.service";
-import { TOGGLELANG, LANG, LoginImg, LogoImg, COPYRIGHT } from "../config";
+import {
+  TOGGLELANG,
+  LANG,
+  LoginImg,
+  LogoImg,
+  COPYRIGHT,
+  LogoMBImg,
+} from "../config";
 import { AppService } from "../app.service";
 import { UrlService } from "../service/url.service";
 
@@ -31,6 +38,7 @@ export class CoreComponent {
   LANG = LANG;
   LoginImg = LoginImg;
   LogoImg = LogoImg;
+  LogoMBImg = LogoMBImg;
   COPYRIGHT = COPYRIGHT;
   overlayRef: OverlayRef;
   subscription: Subscription;

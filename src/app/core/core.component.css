@@ -5,6 +5,56 @@
   background-color: #eee;
 }
 
+@media screen and (max-width: 767px) {
+  .container {
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .container > * {
+    display: flex;
+  }
+
+  .container > *:first-child {
+    flex-direction: column;
+  }
+
+  header {
+    flex: 0 0 55px;
+    height: 55px;
+    padding: 0 20px;
+    background-color: #d5d5f8;
+    display: flex;
+  }
+
+  header img {
+    height: 45px;
+    width: auto;
+  }
+
+  header > * {
+    margin: auto;
+  }
+
+  main > * {
+    padding: 0 20px;
+  }
+
+  footer {
+    flex-direction: column;
+  }
+
+  footer > * {
+    display: flex;
+    justify-content: center;
+    padding-bottom: 15px;
+  }
+
+  footer > *:first-child {
+    color: #727272;
+  }
+}
+
 /* main */
 .mat-card {
   margin: auto;
@@ -46,32 +96,31 @@
   display: flex;
 }
 
-.side .footer {
-  font-size: 0.6rem;
-  justify-content: center;
-}
-
-.side .footer > * {
-  margin: auto 0;
-  padding-bottom: 20px;
-}
-
 .side .logo img {
   width: 150px;
   margin: auto;
   padding: 20px 0;
 }
 
+/* Footer */
+footer {
+  font-size: 0.6rem;
+  justify-content: center;
+}
+
+footer > * {
+  margin: auto 0;
+}
+
 /* Main */
-.main {
+main {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding: 0 40px;
   color: #4d4d4d;
 }
 
-.main .option {
+main .option {
   margin-top: 30px;
   flex: 0 0 35px;
   height: 35px;
@@ -81,15 +130,25 @@
   justify-content: space-between;
 }
 
-.main > *:last-child {
+main > *:last-child {
   padding-bottom: 20px;
   font-size: 0.6rem;
   color: #4d4d4d;
   display: flex;
 }
 
-.main > *:last-child > * {
+main > *:last-child > * {
   margin: auto;
+}
+
+@media screen and (min-width: 768px) {
+  footer > * {
+    padding-bottom: 20px;
+  }
+
+  main {
+    padding: 0 40px;
+  }
 }
 
 /* item-row */

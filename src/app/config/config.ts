@@ -14,6 +14,7 @@ export const LOCALCMS = "localhost:4200";
 
 export const LoginImg = "assets/img/login.png";
 export const LogoImg = "assets/img/text_1.svg";
+export const LogoMBImg = "assets/img/logo3.svg";
 export const LogoTagImg = "assets/img/tag_orange.svg";
 export const VFKEY = "6LebxbwZAAAAAJjTCvRT7eBHfrlaxnJVbaDz401q"
 
