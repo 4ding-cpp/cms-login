@@ -1,0 +1,25 @@
+kind: pipeline
+type: docker
+name: 4d-cms-login
+steps:
+- name: build-cms-login
+  image: node:12.9.1-alpine
+  commands:
+  - npm install
+  - npm run build --prod
+- name: publish-cms-login
+  image: plugins/docker
+  when:
+    branch: master
+    event: push
+  settings:
+    username:
+      from_secret: docker_hub_username
+    password:
+      from_secret: docker_hub_password
+    repo: 4ding/cms-login
+    cache_from: 4ding/cms-login
+    tags:
+    - 'latest'
+    - '0.0.0'
+    dockerfile: drone-ci/Dockerfile
