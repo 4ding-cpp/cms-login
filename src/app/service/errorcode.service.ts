@@ -14,15 +14,15 @@ const ErrorCodes: IErrorCode[] = [
   { code: 101, name: "invalidConnect" },
 
   { code: 0, name: "access" },
-  { code: 1, name: "invalidVF" },
-  { code: 2, name: "invalidAccount" },
-  { code: 3, name: "invalidAccount" },
-  { code: 4, name: "invalidAccount" },
-  { code: 5, name: "invalidAccount" },
-  { code: 6, name: "invalidVF" },
-  { code: 7, name: "invalidAccount" },
-  { code: 8, name: "invalidToken" },
-  { code: 9, name: "invalidPassword" },
+  { code: 1, name: "invalid_VF" },
+  { code: 2, name: "invalid_account" },
+  { code: 3, name: "invalid_account" },
+  { code: 4, name: "invalid_account" },
+  { code: 5, name: "invalid_account" },
+  { code: 6, name: "invalid_VF" },
+  { code: 7, name: "invalid_password" },
+  { code: 8, name: "invalid_token" },
+  { code: 9, name: "invalid_password" },
 ];
 
 @Injectable({

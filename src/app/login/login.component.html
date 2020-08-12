@@ -1,7 +1,7 @@
 <mat-vertical-stepper [linear]="true" #stepper>
   <mat-step [completed]="isCompleted">
     <form [formGroup]="accountFormGroup">
-      <ng-template matStepLabel>Fill out your account</ng-template>
+      <ng-template matStepLabel>{{ "fill_account" | translate }}</ng-template>
       <div class="item-box">
         <div class="item-text mb10">
           <div></div>
@@ -42,7 +42,7 @@
   </mat-step>
   <mat-step [completed]="!!passwordFormGroup.value.password">
     <form [formGroup]="passwordFormGroup">
-      <ng-template matStepLabel>Fill out your password</ng-template>
+      <ng-template matStepLabel>{{ "fill_password" | translate }}</ng-template>
       <div class="item-box">
         <div class="item-text mb10">
           <div></div>

@@ -3,4 +3,6 @@ export const ICONS = [
   { tab: "alert", path: "assets/icon/alert_02.svg" },
   { tab: "tip", path: "assets/icon/tip.svg" },
   { tab: "cancel", path: "assets/icon/cancel.svg" },
+  { tab: "global", path: "assets/icon/global.svg" },
+  { tab: "global_active", path: "assets/icon/global_active.svg" }
 ];

@@ -5,7 +5,7 @@ import { UrlService } from './service/url.service';
 
 @Injectable()
 export class AppService {
-  private lang = 'cn';
+  private lang = 'tw';
   LangKey = LangKey;
 
   constructor(
@@ -26,6 +26,8 @@ export class AppService {
     this.translate.addLangs(arr);
     if (!!localStorage.getItem(this.LangKey)) {
       this.lang = localStorage.getItem(this.LangKey);
+    }else{
+      localStorage.setItem(this.LangKey, this.lang);
     }
     this.translate.use(this.lang);
   }

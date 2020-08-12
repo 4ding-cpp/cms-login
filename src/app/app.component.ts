@@ -1,10 +1,9 @@
 import { Component } from "@angular/core";
 import { MatIconRegistry, MatDialog } from "@angular/material";
 import { DomSanitizer } from "@angular/platform-browser";
-import { COPYRIGHT, LoginImg, LogoImg } from "./config/config";
 import { AppService } from "./app.service";
 import { UrlService } from "./service/url.service";
-import { ICONS } from "./config";
+import { ICONS, TOGGLELANG, COPYRIGHT, LoginImg, LogoImg } from "./config";
 
 @Component({
   selector: "app-root",
@@ -12,6 +11,7 @@ import { ICONS } from "./config";
   styleUrls: ["./app.component.css"],
 })
 export class AppComponent {
+  TOGGLELANG = TOGGLELANG
   LoginImg = LoginImg;
   LogoImg = LogoImg;
   COPYRIGHT = COPYRIGHT;

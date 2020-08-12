@@ -13,16 +13,24 @@
     <div class="main">
       <div>
         <div class="option">
-          <span>{{ "Welcome back" }}</span>
+          <div>
+            <span>{{ "welcome" | translate }}</span>
+          </div>
+          <div *ngIf="TOGGLELANG" (click)="toggleLang()">
+            <mat-icon svgIcon="global" class="icon-25"></mat-icon>
+          </div>
         </div>
         <div>
           <app-login></app-login>
         </div>
       </div>
       <div>
-        <span>
-          當你註冊開店，即表示你已同意 4ding 隱私權政策與會員條款。
-        </span>
+        <div>
+          <span>{{ "agree" | translate }}</span>
+          <span>{{ "policy" | translate }}</span>
+          <span>{{ "and" | translate }}</span>
+          <span>{{ "terms" | translate }}</span>
+        </div>
       </div>
     </div>
   </mat-card>
