@@ -6,7 +6,7 @@ steps:
   image: node:12.9.1-alpine
   commands:
   - npm install
-  - npm run build --prod
+  - npm run build
 - name: publish-cms-login
   image: plugins/docker
   when:
