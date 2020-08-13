@@ -30,7 +30,7 @@ export class UrlService {
   cmsUrl(token: string): string {
     let url = `/?token=${token}`;
     if (this.localCMS) {
-      url = `http://${LOCALCMS}/cms?token=${token}`;
+      url = `http://${LOCALCMS}/?token=${token}`;
     }
     this.logger.print("CMS", url);
     return url;
