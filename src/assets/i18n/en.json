@@ -22,8 +22,8 @@
   "policy": "privacy policy",
   "terms": "Membership Terms",
   "and": "and",
-  "access": "access",
-
+  "dialog_alert": "dialog_alert",
+  "success": "success",
   "import_password": "import_password",
   "import_account": "import_account",
   "invalid_VF": "invalid_VF",

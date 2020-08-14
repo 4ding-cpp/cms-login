@@ -22,8 +22,8 @@
   "policy": "隐私权政策",
   "terms": "会员条款",
   "and": "与",
-  "access": "成功",
-
+  "dialog_alert": "提示",
+  "success": "成功",
   "import_password": "请输入英数字至少6位数",
   "import_account": "请输入手机号码或电子信箱",
   "invalid_VF": "VF 无效",

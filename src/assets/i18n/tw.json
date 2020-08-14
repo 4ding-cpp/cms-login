@@ -22,8 +22,8 @@
   "policy": "隱私權政策",
   "terms": "會員條款",
   "and": "與",
-  "access": "成功",
-
+  "dialog_alert": "提示",
+  "success": "成功",
   "import_password": "請輸入英數字至少6位數",
   "import_account": "請輸入手機號碼或電子信箱",
   "invalid_VF": "VF 無效",
