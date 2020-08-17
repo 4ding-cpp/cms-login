@@ -11,8 +11,6 @@ import {
   MatIconModule,
   MatRadioModule,
 } from "@angular/material";
-import { MateriaDeviceComponent } from "./materia-device.component";
-import { MateriaDeviceService } from "./materia-device.service";
 
 @NgModule({
   imports: [
@@ -38,10 +36,6 @@ import { MateriaDeviceService } from "./materia-device.service";
     MatButtonModule,
     MatIconModule,
     MatRadioModule,
-
-    MateriaDeviceComponent,
   ],
-  declarations: [MateriaDeviceComponent],
-  providers: [MateriaDeviceService],
 })
 export class MateriaModule {}

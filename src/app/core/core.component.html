@@ -1,6 +1,5 @@
-<materia-device></materia-device>
 <div class="container">
-  <mat-card *ngIf="device !== 'mb'">
+  <mat-card *ngIf="device !== 'mb' && device !== 'padSmall'">
     <div class="side">
       <img [src]="LoginImg" alt="login-left" class="bg" />
       <div class="logo">
@@ -17,7 +16,12 @@
           <div>
             <span>{{ "welcome" | translate }}</span>
           </div>
-          <div *ngIf="TOGGLELANG" #originLang (click)="toggleLang()" class="hand">
+          <div
+            *ngIf="TOGGLELANG"
+            #originLang
+            (click)="toggleLang()"
+            class="hand"
+          >
             <mat-icon svgIcon="global" class="icon-25"></mat-icon>
             <mat-icon svgIcon="arrow_down" class="icon-15"></mat-icon>
           </div>
@@ -37,7 +41,7 @@
     </main>
   </mat-card>
 
-  <ng-container *ngIf="device === 'mb'">
+  <ng-container *ngIf="device === 'mb' || device === 'padSmall'">
     <div>
       <header>
         <div class="logo">
@@ -50,7 +54,12 @@
             <div>
               <span>{{ "welcome" | translate }}</span>
             </div>
-            <div *ngIf="TOGGLELANG" #originLang (click)="toggleLang()" class="hand">
+            <div
+              *ngIf="TOGGLELANG"
+              #originLang
+              (click)="toggleLang()"
+              class="hand"
+            >
               <mat-icon svgIcon="global" class="icon-25"></mat-icon>
               <mat-icon svgIcon="arrow_down" class="icon-15"></mat-icon>
             </div>
@@ -77,15 +86,22 @@
     </footer>
   </ng-container>
 
-  <div class="local-login" (click)="setLocalCMS()" [ngClass]="{ active: isLocal }"></div>
+  <div
+    class="local-login"
+    (click)="setLocalCMS()"
+    [ngClass]="{ active: isLocal }"
+  ></div>
 </div>
 
 <!--Overlay-->
 <ng-template #overlayLang>
   <div>
     <ng-container *ngFor="let lang of LANG">
-      <div class="item-row" (click)="processLang(lang.short)"
-        [ngClass]="{ active: lang.short === appService.getLang() }">
+      <div
+        class="item-row"
+        (click)="processLang(lang.short)"
+        [ngClass]="{ active: lang.short === appService.getLang() }"
+      >
         <div>
           <mat-icon svgIcon="global_active" class="icon-25"></mat-icon>
           <span>{{ lang.long | translate }}</span>

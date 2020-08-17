@@ -11,6 +11,7 @@ import { MatIconModule } from '@angular/material';
 import { MaskModule } from './shared/mask/mask.module';
 import { DialogModule } from './shared/dialog/dialog.module';
 import { CoreModule } from "./core/core.module";
+import { DeviceModule } from './modules/device/device.module';
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, "./assets/i18n/", ".json");
@@ -31,6 +32,7 @@ export function createTranslateLoader(http: HttpClient) {
     MatIconModule,
     DialogModule,
     MaskModule,
+    DeviceModule,
     CoreModule,
     AppRoutingModule
   ],

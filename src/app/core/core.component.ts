@@ -14,7 +14,6 @@ import {
 } from "@angular/cdk/overlay";
 import { TemplatePortal } from "@angular/cdk/portal";
 import { Subscription } from "rxjs/internal/Subscription";
-import { MateriaDeviceService } from "../shared/materia/materia-device.service";
 import {
   TOGGLELANG,
   LANG,
@@ -25,6 +24,7 @@ import {
 } from "../config";
 import { AppService } from "../app.service";
 import { UrlService } from "../service/url.service";
+import { DeviceService } from "../modules/device/device.service";
 
 @Component({
   selector: "app-core",
@@ -50,7 +50,7 @@ export class CoreComponent {
     private urlService: UrlService,
     private overlay: Overlay,
     private viewContainerRef: ViewContainerRef,
-    private deviceService: MateriaDeviceService
+    private deviceService: DeviceService
   ) {}
 
   ngOnInit() {

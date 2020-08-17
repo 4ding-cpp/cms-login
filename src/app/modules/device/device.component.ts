@@ -1,19 +1,19 @@
 import { Component, OnInit, OnDestroy } from "@angular/core";
 import { BreakpointObserver } from "@angular/cdk/layout";
 import { Subscription } from "rxjs/internal/Subscription";
-import { MateriaDeviceService } from "./materia-device.service";
+import { DeviceService } from "./device.service";
 
 @Component({
-  selector: "materia-device",
+  selector: "app-device",
   template: "",
 })
-export class MateriaDeviceComponent implements OnInit, OnDestroy {
+export class DeviceComponent implements OnInit, OnDestroy {
   subscription: Subscription;
   device = "";
 
   constructor(
     private breakpointObserver: BreakpointObserver,
-    private service: MateriaDeviceService
+    private service: DeviceService
   ) {}
 
   ngOnInit() {
@@ -23,6 +23,8 @@ export class MateriaDeviceComponent implements OnInit, OnDestroy {
         "(max-width: 1199px)",
         "(min-width: 768px)",
         "(max-width: 767px)",
+        "(min-width: 500px)",
+        "(max-width: 499px)",
       ])
       .subscribe((r) => {
         if (r.breakpoints["(min-width: 1200px)"]) {
@@ -32,12 +34,17 @@ export class MateriaDeviceComponent implements OnInit, OnDestroy {
           r.breakpoints["(min-width: 768px)"] &&
           r.breakpoints["(max-width: 1199px)"]
         ) {
-          this.device = "pad";
+          this.device = "padBig";
         }
-        if (r.breakpoints["(max-width: 767px)"]) {
+        if (
+          r.breakpoints["(min-width: 500px)"] &&
+          r.breakpoints["(max-width: 767px)"]
+        ) {
+          this.device = "padSmall";
+        }
+        if (r.breakpoints["(max-width: 499px)"]) {
           this.device = "mb";
         }
-        console.log(555,this.device)
         this.service.nextDevice(this.device);
       });
   }

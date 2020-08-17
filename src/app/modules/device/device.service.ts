@@ -3,7 +3,7 @@ import { BehaviorSubject } from "rxjs/internal/BehaviorSubject";
 import { Observable } from "rxjs/internal/Observable";
 
 @Injectable()
-export class MateriaDeviceService {
+export class DeviceService {
   private deviceSubject = new BehaviorSubject<string>("");
 
   constructor() {}
