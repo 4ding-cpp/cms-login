@@ -22,18 +22,13 @@
         </div>
         <div>
           <ng-container *ngIf="isLoading !== 'account'">
-            <ng-container *ngIf="!token.accountToken">
+            <ng-container>
               <button
                 class="button bg-brick auto"
                 (click)="checkAccount()"
                 [disabled]="!accountFormGroup.valid"
                 [ngClass]="{ disable: !accountFormGroup.valid }"
               >
-                <span>{{ "next" | translate }}</span>
-              </button>
-            </ng-container>
-            <ng-container *ngIf="!!token.accountToken">
-              <button class="button bg-brick auto" matStepperNext>
                 <span>{{ "next" | translate }}</span>
               </button>
             </ng-container>

@@ -87,8 +87,10 @@ export class LoginComponent implements OnInit, OnDestroy {
     let account = this.accountFormGroup.value.account;
     if (account.search(emailRule) != -1) {
       this.token.email = account;
+      this.token.phone = "";
     } else {
       this.token.phone = account;
+      this.token.email = "";
     }
     this.isLoading = "account";
     this.captcha.getVF("signCheck");
