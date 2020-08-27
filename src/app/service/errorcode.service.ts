@@ -11,6 +11,7 @@ export interface IErrorCode {
 }
 
 const ErrorCodes: IErrorCode[] = [
+  { code: 405, name: "invalidPermission" },
   { code: 101, name: "invalidConnect" },
 
   { code: 0, name: "access" },
@@ -30,6 +31,7 @@ const ErrorCodes: IErrorCode[] = [
 })
 export class ErrorCodeService {
   private ErrorCodes = ErrorCodes;
+  private ErrorOdd = "invalidOdd";
 
   constructor() {}
 
@@ -43,9 +45,7 @@ export class ErrorCodeService {
   getMsgName(code: number): string {
     if (!code) return;
     let i = this.position(code);
-    if (i === -1) {
-      return "error:" + this.ErrorCodes[i].msg;
-    }
+    if (i === -1) return this.ErrorOdd;
     return this.ErrorCodes[i].name;
   }
 
