@@ -1,7 +1,7 @@
 <mat-vertical-stepper [linear]="true" #stepper>
   <mat-step [completed]="isCompleted">
     <form [formGroup]="accountFormGroup">
-      <ng-template matStepLabel>{{ "fill_account" | translate }}</ng-template>
+      <ng-template matStepLabel matStepperIcon="edit">{{ "fill_account" | translate }}</ng-template>
       <div class="item-box">
         <div class="item-text mb10">
           <div></div>

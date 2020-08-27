@@ -3,7 +3,8 @@ import { LoggerService } from "./logger.service";
 import { APICheckUrl, APILoginUrl } from "../config";
 import { Observable } from "rxjs/internal/Observable";
 import { HttpClient, HttpHeaders, HttpResponse } from "@angular/common/http";
-import { map } from "rxjs/operators";
+import { map, catchError } from "rxjs/operators";
+import { of } from "rxjs";
 
 export interface ILogin {
   password?: string;
@@ -58,8 +59,11 @@ export class DataService {
     return this.http.post(u, body, this.options).pipe(
       map((res: HttpResponse<string>) => {
         this.logger.print("http response", res);
-        if (res.status !== 200) return "";
         return JSON.parse(res.body);
+      }),
+      catchError((err: any) => {
+        let o = <IRes>{ code: err.status, value: "" };
+        return of(o);
       })
     );
   }
