@@ -64,7 +64,7 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
             "browserTarget": "cms-login:build",
-            "port": 1337
+            "port": 3333
           },
           "configurations": {
             "production": {

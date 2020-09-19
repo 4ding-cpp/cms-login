@@ -18,4 +18,4 @@ export const LogoTagImg = "assets/img/tag_orange.svg";
 export const VFKEY = "6LebxbwZAAAAAJjTCvRT7eBHfrlaxnJVbaDz401q"
 
 /* Storage */
-export const LangKey = "lang-sel";
+export const LangKey = "ding-lang";
