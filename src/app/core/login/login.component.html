@@ -2,15 +2,14 @@
   <mat-step [completed]="isCompleted">
     <form [formGroup]="accountFormGroup">
       <ng-template matStepLabel>
-        <span>
-          {{ "fill_account" | translate }}
-        </span>
+        {{ "fill_account" | translate }}
       </ng-template>
       <div class="item-box">
         <div class="item-text mb10">
           <div></div>
           <div class="item-row set-ipt">
             <input
+              type="text"
               formControlName="account"
               [placeholder]="'import_account' | translate"
               (keyup.enter)="checkAccount()"
@@ -57,6 +56,7 @@
               type="password"
               formControlName="password"
               [placeholder]="'import_password' | translate"
+              (keyup.enter)="checkLogin()"
             />
             <mat-icon
               *ngIf="passwordFormGroup.controls.password.value != ''"
