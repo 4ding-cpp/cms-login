@@ -14,8 +14,9 @@ export class ValidationMessagesComponent {
     if (!!this.control) {
       for (let propertyName in this.control.errors) {
         if (
-          this.control.errors.hasOwnProperty(propertyName) &&
-          this.control.touched
+          this.control.errors.hasOwnProperty(propertyName)
+          // &&
+          // this.control.touched
         ) {
           return propertyName;
         }

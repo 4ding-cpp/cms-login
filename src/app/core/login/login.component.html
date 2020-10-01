@@ -1,7 +1,11 @@
 <mat-vertical-stepper [linear]="true" #stepper>
   <mat-step [completed]="isCompleted">
     <form [formGroup]="accountFormGroup">
-      <ng-template matStepLabel matStepperIcon="edit">{{ "fill_account" | translate }}</ng-template>
+      <ng-template matStepLabel>
+        <span>
+          {{ "fill_account" | translate }}
+        </span>
+      </ng-template>
       <div class="item-box">
         <div class="item-text mb10">
           <div></div>
@@ -9,6 +13,7 @@
             <input
               formControlName="account"
               [placeholder]="'import_account' | translate"
+              (keyup.enter)="checkAccount()"
             />
             <mat-icon
               *ngIf="accountFormGroup.controls.account.value != ''"
@@ -24,6 +29,7 @@
           <ng-container *ngIf="isLoading !== 'account'">
             <ng-container>
               <button
+                type="button"
                 class="button bg-brick auto"
                 (click)="checkAccount()"
                 [disabled]="!accountFormGroup.valid"
@@ -65,13 +71,15 @@
         <div>
           <ng-container *ngIf="isLoading !== 'password'">
             <button
+              type="button"
               class="button bg-brick auto"
-              style="margin-right: 10px;"
+              style="margin-right: 10px"
               matStepperPrevious
             >
               <span>{{ "back" | translate }}</span>
             </button>
             <button
+              type="button"
               class="button bg-brick auto"
               (click)="checkLogin()"
               [disabled]="!passwordFormGroup.valid"

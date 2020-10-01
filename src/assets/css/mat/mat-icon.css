@@ -27,3 +27,9 @@
   width: 40px;
   height: 40px;
 }
+
+.mat-icon.report {
+  width: 15px;
+  height: 15px;
+  cursor: pointer;
+}

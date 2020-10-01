@@ -40,7 +40,7 @@
 
 /* */
 .set-ipt {
-  border: 1px solid rgb(166, 166, 166);
+  border: 1px solid #a6a6a6;
   border-radius: 5px;
   background-color: #f8f8f8;
   flex: 1 1 auto;
@@ -57,7 +57,7 @@
 }
 
 .set-sel {
-  border: 1px solid rgb(166, 166, 166);
+  border: 1px solid #a6a6a6;
   border-radius: 5px;
   background-color: #f8f8f8;
 }

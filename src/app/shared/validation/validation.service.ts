@@ -1,4 +1,4 @@
-import { FormControl } from "@angular/forms";
+import { FormControl, FormGroup, ValidationErrors } from "@angular/forms";
 
 export class ValidationService {
   static passwordValidator(control: FormControl) {
@@ -74,18 +74,18 @@ export class ValidationService {
     }
   }
 
-  //純數字+.
+  //純數字
   static numberOnlyValidator(control: FormControl) {
     if (!control || !control.value || !control.value.match) {
       return null;
     }
 
-    let val = "";
-    if (typeof control.value == "number") {
+    let val = control.value;
+    if (typeof control.value === "number") {
       val = control.value.toString();
     }
 
-    if (val.match(/[0-9]|\./)) {
+    if (val.match(/^[-]*[0-9]+$/)) {
       return null;
     } else {
       return { invalidNumberOnly: true };
@@ -105,35 +105,34 @@ export class ValidationService {
     }
   }
 
-  static matchingPasswords(otherControlName: string) {
-    let thisControl: FormControl;
-    let otherControl: FormControl;
+  //repeat password
+  static repeatPasswordValidator(c1: string, c2: string) {
+    return (control: FormControl): ValidationErrors => {
+      if (
+        !control ||
+        !control.value ||
+        !control.value.match ||
+        !control.parent
+      ) {
+        return;
+      }
+      const fg = control.parent as FormGroup;
+      if (!fg) return;
+      const p1 = fg.get(c1);
+      const p2 = fg.get(c2);
 
-    return function matchOtherValidate(control: FormControl) {
-      if (!control.parent) {
+      if (p1 === control) {
+        p2.updateValueAndValidity();
         return null;
       }
-      if (!thisControl) {
-        thisControl = control;
-        otherControl = control.parent.get(otherControlName) as FormControl;
-        if (!otherControl) {
-          throw new Error(
-            "matchingPasswords(): other control is not found in parent group"
-          );
-        }
-        otherControl.valueChanges.subscribe(() => {
-          thisControl.updateValueAndValidity();
-        });
-      }
-      if (!otherControl) {
+
+      if (p1.value === p2.value) {
         return null;
-      }
-      if (otherControl.value !== thisControl.value) {
+      } else {
         return {
           invalidRepeatPassword: true,
         };
       }
-      return null;
     };
   }
 }

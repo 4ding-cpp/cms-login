@@ -1,5 +1,6 @@
 .mat-dialog-content {
   text-align: center;
+  padding: 5px 20px !important;
 }
 
 .mat-dialog-content > * {

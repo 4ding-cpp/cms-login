@@ -1,4 +1,11 @@
-import { Component, ViewChild, OnInit, OnDestroy } from "@angular/core";
+import {
+  Component,
+  ViewChild,
+  OnInit,
+  OnDestroy,
+  AfterViewChecked,
+  ChangeDetectorRef,
+} from "@angular/core";
 import {
   Validators,
   FormGroup,
@@ -18,7 +25,7 @@ import { ErrorCodeService } from "src/app/service/errorcode.service";
   templateUrl: "./login.component.html",
   styleUrls: ["./login.component.css"],
 })
-export class LoginComponent implements OnInit, OnDestroy {
+export class LoginComponent implements OnInit, OnDestroy, AfterViewChecked {
   @ViewChild("stepper", { static: false }) private stepper: MatStepper;
   subscription: Subscription;
   identityFormGroup: FormGroup;
@@ -34,7 +41,8 @@ export class LoginComponent implements OnInit, OnDestroy {
     private urlService: UrlService,
     private dataService: DataService,
     private captcha: CaptchaService,
-    private errorcodeService: ErrorCodeService
+    private errorcodeService: ErrorCodeService,
+    private cdr: ChangeDetectorRef
   ) {}
 
   ngOnInit() {
@@ -53,6 +61,10 @@ export class LoginComponent implements OnInit, OnDestroy {
           }
         });
     }
+  }
+
+  ngAfterViewChecked() {
+    this.cdr.detectChanges();
   }
 
   init() {
