@@ -2,7 +2,12 @@ import { Injectable } from "@angular/core";
 import { LoggerService } from "./logger.service";
 import { APICheckUrl, APILoginUrl } from "../config";
 import { Observable } from "rxjs/internal/Observable";
-import { HttpClient, HttpHeaders, HttpResponse } from "@angular/common/http";
+import {
+  HttpClient,
+  HttpErrorResponse,
+  HttpHeaders,
+  HttpResponse,
+} from "@angular/common/http";
 import { map, catchError } from "rxjs/operators";
 import { of } from "rxjs";
 
@@ -57,13 +62,19 @@ export class DataService {
     this.logger.print("http body", body);
 
     return this.http.post(u, body, this.options).pipe(
-      map((res: HttpResponse<string>) => {
-        this.logger.print("http response", res);
-        return JSON.parse(res.body);
+      catchError((err: HttpErrorResponse) => {
+        return of(err);
       }),
-      catchError((err: any) => {
-        let o = <IRes>{ code: err.status, value: "" };
-        return of(o);
+      map((res: HttpResponse<string>) => {
+        let o = <IRes>{};
+        if (res.status === 200) {
+          this.logger.print("http response", res);
+          o = JSON.parse(res.body);
+        } else {
+          this.logger.print("http error", res);
+          o = { code: res.status, value: "" };
+        }
+        return o;
       })
     );
   }

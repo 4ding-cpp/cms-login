@@ -43,7 +43,6 @@ export class ErrorCodeService {
   }
 
   getMsgName(code: number): string {
-    if (!code) return;
     let i = this.position(code);
     if (i === -1) return this.ErrorOdd;
     return this.ErrorCodes[i].name;
