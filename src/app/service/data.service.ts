@@ -56,8 +56,14 @@ export class DataService {
     return this.connect(obj.accountVF, body, APICheckUrl);
   }
 
-  connect(vf: string, body: ILogin, url: string): Observable<IRes> {
+  connect(
+    vf: string,
+    body: ILogin,
+    url: string,
+    store_id?: string
+  ): Observable<IRes> {
     let u = `${url}?vf=${vf}`;
+    if (!!store_id) u = u + "&store=" + store_id;
     this.logger.print("http url", u);
     this.logger.print("http body", body);
 

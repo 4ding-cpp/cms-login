@@ -1,21 +1,14 @@
-import { Injectable, Inject } from '@angular/core';
-import { LANG, LangKey } from './config/config';
-import { TranslateService } from '@ngx-translate/core';
-import { UrlService } from './service/url.service';
+import { Injectable, Inject } from "@angular/core";
+import { LANG, LangKey } from "./config/config";
+import { TranslateService } from "@ngx-translate/core";
+import { UrlService } from "./service/url.service";
 
 @Injectable()
 export class AppService {
-  private lang = 'tw';
+  private lang = "tw";
   LangKey = LangKey;
 
-  constructor(
-    @Inject('HOST') private host: string,
-    @Inject('PROTOCOL') private protocol: string,
-    public translate: TranslateService,
-    private urlService: UrlService
-  ) {
-    this.urlService.setHost(host);
-    this.urlService.setProtocol(protocol);
+  constructor(public translate: TranslateService) {
     this.initLang();
   }
 
@@ -26,7 +19,7 @@ export class AppService {
     this.translate.addLangs(arr);
     if (!!localStorage.getItem(this.LangKey)) {
       this.lang = localStorage.getItem(this.LangKey);
-    }else{
+    } else {
       localStorage.setItem(this.LangKey, this.lang);
     }
     this.translate.use(this.lang);

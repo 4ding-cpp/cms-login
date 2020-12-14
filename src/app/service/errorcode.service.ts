@@ -24,6 +24,7 @@ const ErrorCodes: IErrorCode[] = [
   { code: 7, name: "invalid_password" },
   { code: 8, name: "invalid_token" },
   { code: 9, name: "invalid_password" },
+  { code: 14, name: "invalid_store" },
 ];
 
 @Injectable({
