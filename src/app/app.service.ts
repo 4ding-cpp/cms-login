@@ -1,7 +1,6 @@
-import { Injectable, Inject } from "@angular/core";
+import { Injectable } from "@angular/core";
 import { LANG, LangKey } from "./config/config";
 import { TranslateService } from "@ngx-translate/core";
-import { UrlService } from "./service/url.service";
 
 @Injectable()
 export class AppService {

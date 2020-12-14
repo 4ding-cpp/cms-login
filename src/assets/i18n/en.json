@@ -15,20 +15,25 @@
   "reset": "reset",
   "next": "next",
 
-  "fill_account": "Fill out your account",
-  "fill_password": "Fill out your password",
   "welcome": "Welcome back!",
   "agree": "When you register to open a shop, you have agreed to 4ding",
   "policy": "privacy policy",
   "terms": "Membership Terms",
   "and": "and",
-  "dialog_alert": "dialog_alert",
-  "success": "success",
+
+  "invalid_store_url": "",
+
+  "fill_account": "Fill out your account",
+  "fill_password": "Fill out your password",
+
   "import_password": "import_password",
   "import_account": "import_account",
+  "success": "success",
   "invalid_VF": "invalid_VF",
   "invalid_account": "invalid_account",
   "invalid_password": "invalid_password",
   "invalid_token": "invalid_token",
-  "required": "require"
+  "invalid_store": "invalid_store",
+  "required": "require",
+  "dialog_alert": "dialog_alert"
 }

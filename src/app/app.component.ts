@@ -11,7 +11,7 @@ import { ICONS } from "./config";
 export class AppComponent {
   constructor(
     private matIconRegistry: MatIconRegistry,
-    private domSanitizer: DomSanitizer,
+    private domSanitizer: DomSanitizer
   ) {
     ICONS.forEach((val) => {
       this.matIconRegistry.addSvgIcon(

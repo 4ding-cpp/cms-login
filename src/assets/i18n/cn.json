@@ -15,20 +15,25 @@
   "reset": "重置",
   "next": "下一步",
 
-  "fill_account": "请输入您的帐号",
-  "fill_password": "请输入您的密码",
   "welcome": "欢迎回来！",
   "agree": "当你注册开店，即表示你已同意 4ding",
   "policy": "隐私权政策",
-  "terms": "会员条款",
+  "terms": "服务条款",
   "and": "与",
-  "dialog_alert": "提示",
-  "success": "成功",
+
+  "invalid_store_url": "网址导向错误，请确认您的商店代号是否正确。或请洽询 4DinG客服。",
+
+  "fill_account": "请输入您的帐号",
+  "fill_password": "请输入您的密码",
+
   "import_password": "请输入英数字至少6位数",
   "import_account": "请输入手机号码或电子信箱",
+  "success": "成功",
   "invalid_VF": "VF 无效",
   "invalid_account": "帐号不存在",
   "invalid_password": "密码错误，请再确认一次",
   "invalid_token": "Token 无效",
-  "required": "必填"
+  "invalid_store": "无此商店代号",
+  "required": "必填",
+  "dialog_alert": "提示"
 }
