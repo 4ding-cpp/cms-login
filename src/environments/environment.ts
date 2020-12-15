@@ -5,6 +5,7 @@
 export const environment = {
   production: false,
   logger: true,
+  local: true,
 };
 
 /*

@@ -108,24 +108,26 @@ export class LoginComponent implements OnInit, OnDestroy, AfterViewChecked {
   }
 
   setAccountToken() {
-    this.dataService.connectCheck(this.token).subscribe((res: IRes) => {
-      this.isLoading = "";
-      if (!!res.code) {
-        this.errorcodeService.setMsg(res.code, res.value);
-        let errorName = this.errorcodeService.getMsgName(res.code);
-        this.accountFormGroup.controls.account.setErrors({
-          [errorName]: true,
-        });
-        return;
-      }
-      this.token.accountToken = res.value;
-      this.isCompleted = true;
-      if (this.isCompleted) {
+    this.dataService
+      .connectCheck(this.token, this.urlService.getStoreId())
+      .subscribe((res: IRes) => {
+        this.isLoading = "";
+        if (!!res.code) {
+          this.errorcodeService.setMsg(res.code, res.value);
+          let errorName = this.errorcodeService.getMsgName(res.code);
+          this.accountFormGroup.controls.account.setErrors({
+            [errorName]: true,
+          });
+          return;
+        }
+        this.token.accountToken = res.value;
         this.isCompleted = true;
-        this.stepper.selected.completed = true;
-        this.stepper.next();
-      }
-    });
+        if (this.isCompleted) {
+          this.isCompleted = true;
+          this.stepper.selected.completed = true;
+          this.stepper.next();
+        }
+      });
   }
 
   checkLogin() {
@@ -136,19 +138,21 @@ export class LoginComponent implements OnInit, OnDestroy, AfterViewChecked {
   }
 
   login() {
-    this.dataService.connectLogin(this.token).subscribe((res: IRes) => {
-      this.isLoading = "";
-      if (!!res.code) {
-        let code = res.code + 5;
-        this.errorcodeService.setMsg(code, res.value);
-        let errorName = this.errorcodeService.getMsgName(code);
-        this.passwordFormGroup.controls.password.setErrors({
-          [errorName]: true,
-        });
-        return;
-      }
-      window.location.href = this.urlService.cmsUrl(res.value);
-    });
+    this.dataService
+      .connectLogin(this.token, this.urlService.getStoreId())
+      .subscribe((res: IRes) => {
+        this.isLoading = "";
+        if (!!res.code) {
+          let code = res.code + 5;
+          this.errorcodeService.setMsg(code, res.value);
+          let errorName = this.errorcodeService.getMsgName(code);
+          this.passwordFormGroup.controls.password.setErrors({
+            [errorName]: true,
+          });
+          return;
+        }
+        window.location.href = this.urlService.cmsUrl(res.value);
+      });
   }
 
   resetCol(ipContent: AbstractControl, isAccount = false) {

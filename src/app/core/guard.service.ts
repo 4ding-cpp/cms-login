@@ -5,13 +5,14 @@ import {
   RouterStateSnapshot,
   Router,
   UrlTree,
-  CanActivateChild,
 } from "@angular/router";
+import { environment } from "../../environments/environment";
 import { UrlService } from "../service/url.service";
 
 @Injectable()
 export class GuardService implements CanActivate {
-  origin = "business";
+  private local = environment.local;
+  origin = "store";
 
   constructor(
     @Inject("HOST") private host: string,
@@ -24,17 +25,24 @@ export class GuardService implements CanActivate {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): boolean | UrlTree {
-    const errorUrl = '/error';
-    let c = this.host.split(".");
-    if (!c || !c.length || c.length < 2) return this.router.parseUrl(errorUrl);
-    this.origin = c[0];
-    console.log(1,this.origin)
+    const errorUrl = "/error";
+
+    if (!this.local) {
+      let c = this.host.split(".");
+      if (!c || !c.length || c.length < 2)
+        return this.router.parseUrl(errorUrl);
+      this.origin = c[0];
+    }
+
+    console.log(1, this.origin);
     if (this.origin === "store") {
       let sId = route.queryParamMap.get("store");
       if (!sId) return this.router.parseUrl(errorUrl);
+      this.urlService.setStoreId(sId);
     }
     this.urlService.setHost(this.host);
     this.urlService.setProtocol(this.protocol);
+
     return true;
   }
 }

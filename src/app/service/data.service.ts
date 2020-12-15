@@ -40,27 +40,27 @@ export class DataService {
 
   constructor(private logger: LoggerService, private http: HttpClient) {}
 
-  connectLogin(obj: ILogin): Observable<IRes> {
+  connectLogin(obj: ILogin, store_id: string): Observable<IRes> {
     let body = {
       email: obj.accountToken || "",
       password: obj.password || "",
     };
-    return this.connect(obj.passwordVF, body, APILoginUrl);
+    return this.connect(obj.passwordVF, body, APILoginUrl, store_id);
   }
 
-  connectCheck(obj: ILogin): Observable<IRes> {
+  connectCheck(obj: ILogin, store_id: string): Observable<IRes> {
     let body = {
       phone: obj.phone || "",
       email: obj.email || "",
     };
-    return this.connect(obj.accountVF, body, APICheckUrl);
+    return this.connect(obj.accountVF, body, APICheckUrl, store_id);
   }
 
   connect(
     vf: string,
     body: ILogin,
     url: string,
-    store_id?: string
+    store_id: string
   ): Observable<IRes> {
     let u = `${url}?vf=${vf}`;
     if (!!store_id) u = u + "&store=" + store_id;
