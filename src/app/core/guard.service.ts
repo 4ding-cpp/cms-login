@@ -34,7 +34,6 @@ export class GuardService implements CanActivate {
       this.origin = c[0];
     }
 
-    console.log(1, this.origin);
     if (this.origin === "store") {
       let sId = route.queryParamMap.get("store");
       if (!sId) return this.router.parseUrl(errorUrl);
@@ -42,6 +41,7 @@ export class GuardService implements CanActivate {
     }
     this.urlService.setHost(this.host);
     this.urlService.setProtocol(this.protocol);
+    this.urlService.setOrigin(this.origin);
 
     return true;
   }

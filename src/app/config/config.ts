@@ -5,7 +5,7 @@ export const LANG = [
 ];
 export const TOGGLELANG = true;
 export const DialogWidth = "350px";
-export const COPYRIGHT = "4DingSite-Team";
+export const COPYRIGHT = "4DinG";
 
 export const APICheckUrl = "/sign/check";
 export const APILoginUrl = "/sign/in";

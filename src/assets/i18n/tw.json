@@ -7,6 +7,10 @@
   "english": "英文",
   "traditional": "繁體中文",
 
+  "cms_admin": "四丁總管理系統",
+  "cms_business": "業主總管理系統",
+  "cms_store": "商店總管理系統",
+
   "cancel": "取消",
   "enter": "確認",
   "back": "返回",

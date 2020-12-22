@@ -7,6 +7,10 @@
   "english": "English",
   "traditional": "Traditional",
 
+  "cms_admin": "cmsAdmin",
+  "cms_business": "cmsBusiness",
+  "cms_store": "cmsStore",
+
   "cancel": "cancel",
   "enter": "enter",
   "back": "back",

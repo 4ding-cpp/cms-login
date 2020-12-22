@@ -11,6 +11,7 @@ export class UrlService {
   protocal = "";
   localCMS = false;
   store_id = "";
+  origin = "";
 
   constructor(private logger: LoggerService) {}
 
@@ -26,6 +27,14 @@ export class UrlService {
 
   setLocalCMS(toggle: boolean) {
     this.localCMS = toggle;
+  }
+
+  setOrigin(origin: string) {
+    this.origin = origin;
+  }
+
+  getOrigin() {
+    return this.origin;
   }
 
   setStoreId(store_id: string) {

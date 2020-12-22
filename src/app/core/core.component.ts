@@ -44,6 +44,7 @@ export class CoreComponent {
   subscription: Subscription;
   isLocal = false;
   device = "";
+  origin = "cms-business";
 
   constructor(
     public appService: AppService,
@@ -63,6 +64,7 @@ export class CoreComponent {
           }
         });
     }
+    this.origin = this.urlService.getOrigin();
   }
 
   setLocalCMS() {

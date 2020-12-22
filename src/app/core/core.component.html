@@ -6,6 +6,11 @@
         <img [src]="LogoImg" alt="logo" />
       </div>
       <footer>
+        <span *ngIf="origin === 'admin'">{{ "cms_admin" | translate }}</span>
+        <span *ngIf="origin === 'business'">
+          {{ "cms_business" | translate }}
+        </span>
+        <span *ngIf="origin === 'store'">{{ "cms_store" | translate }}</span>
         <mat-icon svgIcon="copyright" class="icon-15"></mat-icon>
         <span>{{ COPYRIGHT }}</span>
       </footer>
