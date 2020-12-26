@@ -11,7 +11,7 @@ const routes: Routes = [
     component: CoreComponent,
     children: [
       {
-        path: "login/in",
+        path: "login",
         canActivate: [GuardService],
         component: LoginComponent,
       },
@@ -19,7 +19,7 @@ const routes: Routes = [
         path: "error",
         component: ErrorComponent,
       },
-      { path: "", redirectTo: "login/in", pathMatch: "full" },
+      { path: "", redirectTo: "login", pathMatch: "full" },
     ],
   },
 ];
