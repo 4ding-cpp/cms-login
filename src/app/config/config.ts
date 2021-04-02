@@ -18,8 +18,5 @@ export const LogoMBImg = "assets/img/logo3.svg";
 export const LogoTagImg = "assets/img/tag_orange.svg";
 export const VFKEY = "6LebxbwZAAAAAJjTCvRT7eBHfrlaxnJVbaDz401q";
 
-export const OTPTest = '000000'
-export const isOTPTest = true;
-
 /* Storage */
 export const LangKey = "ding-lang";
