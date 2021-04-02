@@ -1,5 +1,8 @@
 <mat-vertical-stepper [linear]="true" #stepper>
-  <mat-step [completed]="isCompleted">
+  <mat-step
+    [completed]="loginUser.accountComplete"
+    [editable]="loginUser.accountEdit"
+  >
     <form [formGroup]="accountFormGroup">
       <ng-template matStepLabel>
         {{ "fill_account" | translate }}
@@ -15,8 +18,8 @@
               (keyup.enter)="checkAccount()"
             />
             <mat-icon
-              *ngIf="accountFormGroup.controls.account.value != ''"
-              (click)="resetCol(accountFormGroup.controls.account, true)"
+              *ngIf="!!accountFormGroup.controls.account.value"
+              (click)="resetCol(accountFormGroup.controls.account)"
               svgIcon="cancel"
             ></mat-icon>
           </div>
@@ -45,7 +48,10 @@
       </div>
     </form>
   </mat-step>
-  <mat-step [completed]="!!passwordFormGroup.value.password">
+  <mat-step
+    [completed]="loginUser.passwordComplete"
+    [editable]="loginUser.passwordEdit"
+  >
     <form [formGroup]="passwordFormGroup">
       <ng-template matStepLabel>{{ "fill_password" | translate }}</ng-template>
       <div class="item-box">
@@ -56,7 +62,7 @@
               type="password"
               formControlName="password"
               [placeholder]="'import_password' | translate"
-              (keyup.enter)="checkLogin()"
+              (keyup.enter)="checkPassword()"
             />
             <mat-icon
               *ngIf="passwordFormGroup.controls.password.value != ''"
@@ -74,14 +80,14 @@
               type="button"
               class="button bg-brick auto"
               style="margin-right: 10px"
-              matStepperPrevious
+              (click)="stepperBack('account')"
             >
               <span>{{ "back" | translate }}</span>
             </button>
             <button
               type="button"
               class="button bg-brick auto"
-              (click)="checkLogin()"
+              (click)="checkPassword()"
               [disabled]="!passwordFormGroup.valid"
               [ngClass]="{ disable: !passwordFormGroup.valid }"
             >
@@ -89,6 +95,48 @@
             </button>
           </ng-container>
           <ng-container *ngIf="isLoading === 'password'">
+            <mask-load></mask-load>
+          </ng-container>
+        </div>
+      </div>
+    </form>
+  </mat-step>
+  <mat-step [completed]="!!otpFormGroup.controls.otp.value">
+    <form [formGroup]="otpFormGroup">
+      <ng-template matStepLabel>{{ "fill_otp" | translate }}</ng-template>
+      <div class="item-box">
+        <div class="item-text mb10">
+          <div></div>
+          <div class="item-row set-ipt">
+            <input
+              type="text"
+              formControlName="otp"
+              [placeholder]="'import_otp' | translate"
+              (keyup.enter)="checkOTP()"
+            />
+            <mat-icon
+              *ngIf="!!otpFormGroup.controls.otp.value"
+              (click)="resetCol(otpFormGroup.controls.otp)"
+              svgIcon="cancel"
+            ></mat-icon>
+          </div>
+          <validation-messages
+            [control]="otpFormGroup.controls.otp"
+          ></validation-messages>
+        </div>
+        <div>
+          <ng-container *ngIf="isLoading !== 'otp'">
+            <button
+              type="button"
+              class="button bg-brick auto"
+              (click)="checkOTP()"
+              [disabled]="!otpFormGroup.valid"
+              [ngClass]="{ disable: !otpFormGroup.valid }"
+            >
+              <span>{{ "login" | translate }}</span>
+            </button>
+          </ng-container>
+          <ng-container *ngIf="isLoading === 'otp'">
             <mask-load></mask-load>
           </ng-container>
         </div>

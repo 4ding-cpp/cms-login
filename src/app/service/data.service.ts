@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { LoggerService } from "./logger.service";
-import { APICheckUrl, APILoginUrl } from "../config";
+import { APICheckUrl, APILoginUrl, APIOTPUrl } from "../config";
 import { Observable } from "rxjs/internal/Observable";
 import {
   HttpClient,
@@ -12,12 +12,19 @@ import { map, catchError } from "rxjs/operators";
 import { of } from "rxjs";
 
 export interface ILogin {
-  password?: string;
   phone?: string;
   email?: string;
-  accountToken?: string;
+  password?: string;
+  otp?: string;
   accountVF?: string;
+  accountToken?: string;
   passwordVF?: string;
+  loginToken?: string;
+  otpVF?: string;
+  accountComplete?: boolean;
+  passwordComplete?: boolean;
+  accountEdit?: boolean;
+  passwordEdit?: boolean;
 }
 
 export interface IRes {
@@ -40,7 +47,15 @@ export class DataService {
 
   constructor(private logger: LoggerService, private http: HttpClient) {}
 
-  connectLogin(obj: ILogin, store_id: string): Observable<IRes> {
+  connectAccount(obj: ILogin, store_id: string): Observable<IRes> {
+    let body = {
+      phone: obj.phone || "",
+      email: obj.email || "",
+    };
+    return this.connect(obj.accountVF, body, APICheckUrl, store_id);
+  }
+
+  connectPassword(obj: ILogin, store_id: string): Observable<IRes> {
     let body = {
       email: obj.accountToken || "",
       password: obj.password || "",
@@ -48,12 +63,12 @@ export class DataService {
     return this.connect(obj.passwordVF, body, APILoginUrl, store_id);
   }
 
-  connectCheck(obj: ILogin, store_id: string): Observable<IRes> {
+  connectOTP(obj: ILogin, store_id: string): Observable<IRes> {
     let body = {
-      phone: obj.phone || "",
-      email: obj.email || "",
+      email: obj.loginToken || "",
+      password: obj.otp || "",
     };
-    return this.connect(obj.accountVF, body, APICheckUrl, store_id);
+    return this.connect(obj.otpVF, body, APIOTPUrl, store_id);
   }
 
   connect(

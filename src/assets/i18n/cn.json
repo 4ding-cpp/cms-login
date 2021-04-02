@@ -24,15 +24,28 @@
 
   "fill_account": "请输入您的帐号",
   "fill_password": "请输入您的密码",
+  "fill_otp": "Google Authenticator 验证码（未在白名单范围内IP）",
 
   "import_password": "请输入英数字至少6位数",
   "import_account": "请输入手机号码或电子信箱",
+  "import_otp": "请输入Google Authenticator 验证码",
+
+  "dialog_alert": "提示",
   "success": "成功",
-  "invalid_VF": "VF 无效",
-  "invalid_account": "帐号不存在",
-  "invalid_password": "密码错误，请再确认一次",
-  "invalid_token": "Token 无效",
-  "invalid_store": "无此商店代号",
   "required": "必填",
-  "dialog_alert": "提示"
+  "invalidConnect": "网路未连接",
+  "invalidPermission": "无权限访问",
+  "invalid_VF": "VF 无效",
+  "invalid_json": "格式错误",
+  "invalid_complete": "资料不完整",
+  "invalid_account": "帐号不存在",
+  "invalid_account_token": "帐号 Token 无效",
+  "invalid_password": "密码错误，请再确认一次",
+  "invalid_password_token": "密码 Token 无效",
+  "invalid_otp": "OTP 无效",
+
+  "invalid_store": "无此商店代号",
+  "invalid_account_exist": "帐号不存在",
+  "invalid_password_forget": "忘记密码的请求无效",
+  "invalid_password_change": "更新密码错误"
 }

@@ -24,15 +24,28 @@
 
   "fill_account": "Fill out your account",
   "fill_password": "Fill out your password",
+  "fill_otp": "fill_otp",
 
   "import_password": "import_password",
   "import_account": "import_account",
+  "import_otp": "import_otp",
+
+  "dialog_alert": "dialog_alert",
   "success": "success",
+  "required": "required",
+  "invalidConnect": "invalidConnect",
+  "invalidPermission": "invalidPermission",
   "invalid_VF": "invalid_VF",
+  "invalid_json": "invalid_json",
+  "invalid_complete": "invalid_complete",
   "invalid_account": "invalid_account",
+  "invalid_account_token": "invalid_account_token",
   "invalid_password": "invalid_password",
-  "invalid_token": "invalid_token",
+  "invalid_password_token": "invalid_password_token",
+  "invalid_otp": "invalid_otp",
+
   "invalid_store": "invalid_store",
-  "required": "require",
-  "dialog_alert": "dialog_alert"
+  "invalid_account_exist": "invalid_account_exist",
+  "invalid_password_forget": "invalid_password_forget",
+  "invalid_password_change": "invalid_password_change"
 }

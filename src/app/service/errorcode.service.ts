@@ -14,17 +14,22 @@ const ErrorCodes: IErrorCode[] = [
   { code: 405, name: "invalidPermission" },
   { code: 101, name: "invalidConnect" },
 
-  { code: 0, name: "access" },
-  { code: 1, name: "invalid_VF" },
-  { code: 2, name: "invalid_account" },
-  { code: 3, name: "invalid_account" },
-  { code: 4, name: "invalid_account" },
-  { code: 5, name: "invalid_account" },
-  { code: 6, name: "invalid_VF" },
-  { code: 7, name: "invalid_password" },
-  { code: 8, name: "invalid_token" },
-  { code: 9, name: "invalid_password" },
-  { code: 14, name: "invalid_store" },
+  { code: 0, name: "success" },
+  { code: 9, name: "import_otp" },
+
+  { code: 10, name: "invalid_VF" },
+  { code: 11, name: "invalid_json" },
+  { code: 12, name: "invalid_complete" },
+  { code: 13, name: "invalid_account" },
+  { code: 14, name: "invalid_account_token" },
+  { code: 15, name: "invalid_password" },
+  { code: 16, name: "invalid_password_token" },
+  { code: 17, name: "invalid_otp" },
+
+  { code: 21, name: "invalid_store" },
+  { code: 22, name: "invalid_account_exist" },
+  { code: 23, name: "invalid_password_forget" },
+  { code: 24, name: "invalid_password_change" },
 ];
 
 @Injectable({

@@ -3,7 +3,7 @@ import { BehaviorSubject } from "rxjs/internal/BehaviorSubject";
 import { Observable } from "rxjs/internal/Observable";
 import { ReCaptchaV3Service } from "ngx-captcha";
 import { VFKEY } from "src/app/config";
-import { ILogin } from './data.service';
+import { ILogin } from "./data.service";
 
 @Injectable({
   providedIn: "root",
@@ -32,14 +32,18 @@ export class CaptchaService {
         let o = <ILogin>{
           accountVF: "",
           passwordVF: "",
+          otpVF: "",
         };
 
         switch (vfMode) {
+          case "signCheck":
+            o.accountVF = vf;
+            break;
           case "signIn":
             o.passwordVF = vf;
             break;
-          case "signCheck":
-            o.accountVF = vf;
+          case "signOTP":
+            o.otpVF = vf;
             break;
         }
         this.nextCaptcha(o);

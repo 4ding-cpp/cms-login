@@ -24,15 +24,28 @@
 
   "fill_account": "請輸入您的帳號",
   "fill_password": "請輸入您的密碼",
+  "fill_otp": "Google Authenticator 驗證碼（未在白名單範圍內IP）",
 
   "import_password": "請輸入英數字至少6位數",
   "import_account": "請輸入手機號碼或電子信箱",
+  "import_otp": "請輸入Google Authenticator 驗證碼",
+
+  "dialog_alert": "提示",
   "success": "成功",
-  "invalid_VF": "VF 無效",
-  "invalid_account": "帳號不存在",
-  "invalid_password": "密碼錯誤，請再確認一次",
-  "invalid_token": "Token 無效",
-  "invalid_store": "無此商店代號",
   "required": "必填",
-  "dialog_alert": "提示"
+  "invalidConnect": "網路未連接",
+  "invalidPermission": "無權限訪問",
+  "invalid_VF": "VF 無效",
+  "invalid_json": "格式錯誤",
+  "invalid_complete": "資料不完整",
+  "invalid_account": "帳號不存在",
+  "invalid_account_token": "帳號 Token 無效",
+  "invalid_password": "密碼錯誤，請再確認一次",
+  "invalid_password_token": "密碼 Token 無效",
+  "invalid_otp": "OTP 無效",
+
+  "invalid_store": "無此商店代號",
+  "invalid_account_exist": "帳號不存在",
+  "invalid_password_forget": "忘記密碼的請求無效",
+  "invalid_password_change": "更新密碼錯誤"
 }

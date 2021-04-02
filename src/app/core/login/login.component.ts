@@ -18,6 +18,7 @@ import { ILogin, DataService, IRes } from "src/app/service/data.service";
 import { UrlService } from "src/app/service/url.service";
 import { CaptchaService } from "src/app/service/captcha.service";
 import { ErrorCodeService } from "src/app/service/errorcode.service";
+import { take } from "rxjs/operators";
 
 @Component({
   selector: "app-login",
@@ -27,12 +28,16 @@ import { ErrorCodeService } from "src/app/service/errorcode.service";
 export class LoginComponent implements OnInit, OnDestroy, AfterViewChecked {
   @ViewChild("stepper", { static: false }) private stepper: MatStepper;
   subscription: Subscription;
-  identityFormGroup: FormGroup;
+  subscriptionAccount: Subscription;
+  subscriptionPassword: Subscription;
+  subscriptionOTP: Subscription;
+
   accountFormGroup: FormGroup;
   passwordFormGroup: FormGroup;
-  token: ILogin = null;
+  otpFormGroup: FormGroup;
+
+  loginUser: ILogin = null;
   isLoading = "";
-  isCompleted = false;
 
   constructor(
     private fb: FormBuilder,
@@ -48,38 +53,57 @@ export class LoginComponent implements OnInit, OnDestroy, AfterViewChecked {
     this.init();
     this.createForm();
     if (!!this.captcha.isCaptchaIn()) {
-      this.subscription = this.captcha
-        .isCaptchaIn()
-        .subscribe((token: ILogin) => {
-          this.token = { ...this.token, ...token };
-          if (!!this.accountFormGroup && !!this.token.accountVF) {
-            this.setAccountToken();
-          }
-          if (!!this.token.passwordVF) {
-            this.login();
-          }
-        });
+      this.subscription = this.captcha.isCaptchaIn().subscribe((vf: ILogin) => {
+        if (!!vf && !!vf.accountVF) {
+          this.loginUser.accountVF = vf.accountVF;
+          this.connectAccount();
+        }
+        if (!!vf && !!vf.passwordVF) {
+          this.loginUser.passwordVF = vf.passwordVF;
+          this.connectPassword();
+        }
+        if (!!vf && !!vf.otpVF) {
+          this.loginUser.otpVF = vf.otpVF;
+          this.connectOTP();
+        }
+      });
     }
+  }
+
+  init() {
+    this.loginUser = {
+      phone: "",
+      email: "",
+      password: "",
+      otp: "",
+      accountVF: "",
+      accountToken: "",
+      passwordVF: "",
+      loginToken: "",
+      otpVF: "",
+      accountComplete: false,
+      passwordComplete: false,
+      accountEdit: true,
+      passwordEdit: true,
+    };
   }
 
   ngAfterViewChecked() {
     this.cdr.detectChanges();
   }
 
-  init() {
-    this.token = {
-      password: "",
-      phone: "",
-      email: "",
-      accountToken: "",
-      accountVF: "",
-      passwordVF: "",
-    };
-  }
-
   ngOnDestroy() {
     if (!!this.subscription) {
       this.subscription.unsubscribe();
+    }
+    if (!!this.subscriptionAccount) {
+      this.subscriptionAccount.unsubscribe();
+    }
+    if (!!this.subscriptionPassword) {
+      this.subscriptionPassword.unsubscribe();
+    }
+    if (!!this.subscriptionOTP) {
+      this.subscriptionOTP.unsubscribe();
     }
   }
 
@@ -90,76 +114,162 @@ export class LoginComponent implements OnInit, OnDestroy, AfterViewChecked {
     this.passwordFormGroup = this.fb.group({
       password: ["", Validators.required],
     });
+    this.otpFormGroup = this.fb.group({
+      otp: ["", Validators.required],
+    });
   }
 
+  /* Account */
   checkAccount() {
     if (!this.accountFormGroup.value.account) return;
     let emailRule = /^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z]+$/;
     let account = this.accountFormGroup.value.account;
     if (account.search(emailRule) != -1) {
-      this.token.email = account;
-      this.token.phone = "";
+      this.loginUser.email = account;
+      this.loginUser.phone = "";
     } else {
-      this.token.phone = account;
-      this.token.email = "";
+      this.loginUser.phone = account;
+      this.loginUser.email = "";
     }
     this.isLoading = "account";
     this.captcha.getVF("signCheck");
   }
 
-  setAccountToken() {
-    this.dataService
-      .connectCheck(this.token, this.urlService.getStoreId())
+  connectAccount() {
+    this.subscriptionAccount = this.dataService
+      .connectAccount(this.loginUser, this.urlService.getStoreId())
+      .pipe(take(1))
       .subscribe((res: IRes) => {
         this.isLoading = "";
         if (!!res.code) {
-          this.errorcodeService.setMsg(res.code, res.value);
-          let errorName = this.errorcodeService.getMsgName(res.code);
-          this.accountFormGroup.controls.account.setErrors({
-            [errorName]: true,
-          });
+          this.loginUser.accountComplete = false;
+          this.loginUser.accountEdit = true;
+          this.loginUser.accountToken = "";
+          this.setError("account", res.code, res.value);
           return;
         }
-        this.token.accountToken = res.value;
-        this.isCompleted = true;
-        if (this.isCompleted) {
-          this.isCompleted = true;
-          this.stepper.selected.completed = true;
-          this.stepper.next();
-        }
+        this.setToken("accountToken", res.value);
+        this.stepperNext("account");
       });
   }
 
-  checkLogin() {
+  /* Password */
+  checkPassword() {
     if (!this.passwordFormGroup.value.password) return;
-    this.token.password = this.passwordFormGroup.value.password;
+    this.loginUser.password = this.passwordFormGroup.value.password;
     this.isLoading = "password";
     this.captcha.getVF("signIn");
   }
 
-  login() {
-    this.dataService
-      .connectLogin(this.token, this.urlService.getStoreId())
+  connectPassword() {
+    this.subscriptionPassword = this.dataService
+      .connectPassword(this.loginUser, this.urlService.getStoreId())
+      .pipe(take(1))
       .subscribe((res: IRes) => {
         this.isLoading = "";
         if (!!res.code) {
-          let code = res.code + 5;
-          this.errorcodeService.setMsg(code, res.value);
-          let errorName = this.errorcodeService.getMsgName(code);
-          this.passwordFormGroup.controls.password.setErrors({
-            [errorName]: true,
-          });
+          if (res.code === 9) {
+            // otp
+            this.setToken("loginToken", res.value);
+            this.stepperNext("password");
+          } else {
+            this.loginUser.passwordComplete = false;
+            this.loginUser.passwordEdit = true;
+            this.loginUser.loginToken = "";
+            this.setError("password", res.code, res.value);
+          }
           return;
         }
-        window.location.href = this.urlService.cmsUrl(res.value);
+        // login
+        this.setToken("loginToken", res.value);
+        this.login();
       });
   }
 
-  resetCol(ipContent: AbstractControl, isAccount = false) {
+  /* OTP */
+  checkOTP() {
+    if (!this.otpFormGroup.value.otp) return;
+    this.loginUser.otp = this.otpFormGroup.value.otp;
+    this.isLoading = "otp";
+    this.captcha.getVF("signOTP");
+  }
+
+  connectOTP() {
+    this.subscriptionOTP = this.dataService
+      .connectOTP(this.loginUser, this.urlService.getStoreId())
+      .pipe(take(1))
+      .subscribe((res: IRes) => {
+        this.isLoading = "";
+        if (!!res.code) {
+          this.setError("otp", res.code, res.value);
+          return;
+        }
+        this.login();
+      });
+  }
+
+  /* Other */
+  resetCol(ipContent: AbstractControl) {
+    if (!ipContent) return;
     ipContent.setValue("");
-    if (isAccount) {
-      this.isCompleted = false;
-      this.token.accountToken = "";
+  }
+
+  setError(position: string, code: number, value: string) {
+    this.errorcodeService.setMsg(code, value);
+    let errorName = this.errorcodeService.getMsgName(code);
+    let c: AbstractControl = null;
+    switch (position) {
+      case "account":
+        c = this.accountFormGroup.controls.account;
+        break;
+      case "password":
+        c = this.passwordFormGroup.controls.password;
+        break;
+      case "otp":
+        c = this.otpFormGroup.controls.otp;
+        break;
     }
+    if (!!c) {
+      c.setErrors({
+        [errorName]: true,
+      });
+    }
+  }
+
+  setToken(positionToken: string, value: string) {
+    this.loginUser[positionToken] = value;
+  }
+
+  stepperNext(position: string) {
+    switch (position) {
+      case "account":
+        this.loginUser.accountComplete = true;
+        this.loginUser.accountEdit = false;
+        break;
+      case "password":
+        this.loginUser.passwordComplete = true;
+        this.loginUser.passwordEdit = false;
+        break;
+    }
+    this.stepper.selected.completed = true;
+    this.cdr.detectChanges();
+    this.stepper.next();
+  }
+
+  stepperBack(position: string) {
+    switch (position) {
+      case "account":
+        this.loginUser.accountComplete = false;
+        this.loginUser.accountEdit = true;
+        break;
+    }
+    this.stepper.selected.completed = false;
+    this.cdr.detectChanges();
+    this.stepper.previous();
+  }
+
+  login() {
+    if (!this.loginUser.loginToken) return;
+    window.location.href = this.urlService.cmsUrl(this.loginUser.loginToken);
   }
 }
