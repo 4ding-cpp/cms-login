@@ -10,8 +10,8 @@ steps:
   - name: bucket-business
     image: plugins/gcs
     settings:
-      source: dist/cms-login
-      target: ding4site-cms-login/
+      source: dist
+      target: ding4site/
       gzip: html,js,json,css,jpg,png,svg,txt,ico
       token:
         from_secret: gcr_credential
