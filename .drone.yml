@@ -7,7 +7,7 @@ steps:
     commands:
       - npm install
       - npm run build
-  - name: bucket-business
+  - name: bucket
     image: plugins/gcs
     settings:
       source: dist
