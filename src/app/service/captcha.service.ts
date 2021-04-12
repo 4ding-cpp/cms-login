@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 import { BehaviorSubject } from "rxjs/internal/BehaviorSubject";
 import { Observable } from "rxjs/internal/Observable";
 import { ReCaptchaV3Service } from "ngx-captcha";
-import { VFKEY } from "src/app/config";
+import { VFKEY } from "../config";
 import { ILogin } from "./data.service";
 
 @Injectable({
