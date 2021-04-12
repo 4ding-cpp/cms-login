@@ -12,7 +12,7 @@ import { UrlService } from "../service/url.service";
 @Injectable()
 export class GuardService implements CanActivate {
   private local = environment.local;
-  origin = "admin";
+  origin = "store";
 
   constructor(
     @Inject("HOST") private host: string,

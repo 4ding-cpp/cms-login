@@ -15,7 +15,7 @@
               type="text"
               formControlName="account"
               [placeholder]="'import_account' | translate"
-              (keyup.enter)="checkAccount()"
+              (keyup.enter)="onEnter('account')"
             />
             <mat-icon
               *ngIf="!!accountFormGroup.controls.account.value"
@@ -62,7 +62,7 @@
               type="password"
               formControlName="password"
               [placeholder]="'import_password' | translate"
-              (keyup.enter)="checkPassword()"
+              (keyup.enter)="onEnter('password')"
             />
             <mat-icon
               *ngIf="passwordFormGroup.controls.password.value != ''"
@@ -112,7 +112,7 @@
               type="text"
               formControlName="otp"
               [placeholder]="'import_otp' | translate"
-              (keyup.enter)="checkOTP()"
+              (keyup.enter)="onEnter('otp')"
             />
             <mat-icon
               *ngIf="!!otpFormGroup.controls.otp.value"

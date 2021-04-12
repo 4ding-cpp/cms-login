@@ -16,9 +16,10 @@ import { MatDialog, MatStepper } from "@angular/material";
 import { Subscription } from "rxjs/internal/Subscription";
 import { ILogin, DataService, IRes } from "src/app/service/data.service";
 import { UrlService } from "src/app/service/url.service";
-import { CaptchaService } from "src/app/service/captcha.service";
 import { ErrorCodeService } from "src/app/service/errorcode.service";
-import { take } from "rxjs/operators";
+import { debounceTime, take } from "rxjs/operators";
+import { CaptchaService } from "src/app/service/captcha.service";
+import { KeyupService } from "src/app/service/keyup.service";
 
 @Component({
   selector: "app-login",
@@ -27,11 +28,8 @@ import { take } from "rxjs/operators";
 })
 export class LoginComponent implements OnInit, OnDestroy, AfterViewChecked {
   @ViewChild("stepper", { static: false }) private stepper: MatStepper;
-  subscription: Subscription;
-  subscriptionAccount: Subscription;
-  subscriptionPassword: Subscription;
-  subscriptionOTP: Subscription;
-
+  subscriptionCaptcha: Subscription;
+  subscriptionKeyup: Subscription;
   accountFormGroup: FormGroup;
   passwordFormGroup: FormGroup;
   otpFormGroup: FormGroup;
@@ -45,6 +43,7 @@ export class LoginComponent implements OnInit, OnDestroy, AfterViewChecked {
     private urlService: UrlService,
     private dataService: DataService,
     private captcha: CaptchaService,
+    private keyupService: KeyupService,
     private errorcodeService: ErrorCodeService,
     private cdr: ChangeDetectorRef
   ) {}
@@ -52,21 +51,42 @@ export class LoginComponent implements OnInit, OnDestroy, AfterViewChecked {
   ngOnInit() {
     this.init();
     this.createForm();
+
     if (!!this.captcha.isCaptchaIn()) {
-      this.subscription = this.captcha.isCaptchaIn().subscribe((vf: ILogin) => {
-        if (!!vf && !!vf.accountVF) {
-          this.loginUser.accountVF = vf.accountVF;
-          this.connectAccount();
-        }
-        if (!!vf && !!vf.passwordVF) {
-          this.loginUser.passwordVF = vf.passwordVF;
-          this.connectPassword();
-        }
-        if (!!vf && !!vf.otpVF) {
-          this.loginUser.otpVF = vf.otpVF;
-          this.connectOTP();
-        }
-      });
+      this.subscriptionCaptcha = this.captcha
+        .isCaptchaIn()
+        .subscribe((vf: ILogin) => {
+          if (!!vf && !!vf.accountVF) {
+            this.loginUser.accountVF = vf.accountVF;
+            this.connectAccount();
+          }
+          if (!!vf && !!vf.passwordVF) {
+            this.loginUser.passwordVF = vf.passwordVF;
+            this.connectPassword();
+          }
+          if (!!vf && !!vf.otpVF) {
+            this.loginUser.otpVF = vf.otpVF;
+            this.connectOTP();
+          }
+        });
+    }
+    if (!!this.keyupService.isKeyupIn()) {
+      this.subscriptionKeyup = this.keyupService
+        .isKeyupIn()
+        .pipe(debounceTime(1000))
+        .subscribe((val: string) => {
+          switch (val) {
+            case "account":
+              this.checkAccount();
+              break;
+            case "password":
+              this.checkPassword();
+              break;
+            case "otp":
+              this.checkOTP();
+              break;
+          }
+        });
     }
   }
 
@@ -93,17 +113,11 @@ export class LoginComponent implements OnInit, OnDestroy, AfterViewChecked {
   }
 
   ngOnDestroy() {
-    if (!!this.subscription) {
-      this.subscription.unsubscribe();
+    if (!!this.subscriptionCaptcha) {
+      this.subscriptionCaptcha.unsubscribe();
     }
-    if (!!this.subscriptionAccount) {
-      this.subscriptionAccount.unsubscribe();
-    }
-    if (!!this.subscriptionPassword) {
-      this.subscriptionPassword.unsubscribe();
-    }
-    if (!!this.subscriptionOTP) {
-      this.subscriptionOTP.unsubscribe();
+    if (!!this.subscriptionKeyup) {
+      this.subscriptionKeyup.unsubscribe();
     }
   }
 
@@ -136,7 +150,7 @@ export class LoginComponent implements OnInit, OnDestroy, AfterViewChecked {
   }
 
   connectAccount() {
-    this.subscriptionAccount = this.dataService
+    this.dataService
       .connectAccount(this.loginUser, this.urlService.getStoreId())
       .pipe(take(1))
       .subscribe((res: IRes) => {
@@ -162,7 +176,7 @@ export class LoginComponent implements OnInit, OnDestroy, AfterViewChecked {
   }
 
   connectPassword() {
-    this.subscriptionPassword = this.dataService
+    this.dataService
       .connectPassword(this.loginUser, this.urlService.getStoreId())
       .pipe(take(1))
       .subscribe((res: IRes) => {
@@ -195,7 +209,7 @@ export class LoginComponent implements OnInit, OnDestroy, AfterViewChecked {
   }
 
   connectOTP() {
-    this.subscriptionOTP = this.dataService
+    this.dataService
       .connectOTP(this.loginUser, this.urlService.getStoreId())
       .pipe(take(1))
       .subscribe((res: IRes) => {
@@ -271,5 +285,10 @@ export class LoginComponent implements OnInit, OnDestroy, AfterViewChecked {
   login() {
     if (!this.loginUser.loginToken) return;
     window.location.href = this.urlService.cmsUrl(this.loginUser.loginToken);
+  }
+
+  onEnter(val: string) {
+    this.isLoading = val;
+    this.keyupService.nextKeyup(val);
   }
 }
