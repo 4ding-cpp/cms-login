@@ -12,7 +12,7 @@ import { UrlService } from "../service/url.service";
 @Injectable()
 export class GuardService implements CanActivate {
   private local = environment.local;
-  origin = "store";
+  origin = "sales";
 
   constructor(
     @Inject("HOST") private host: string,
@@ -34,7 +34,7 @@ export class GuardService implements CanActivate {
       this.origin = c[0];
     }
 
-    if (this.origin === "store") {
+    if (this.origin === "store" || this.origin === "sales") {
       let sId = route.queryParamMap.get("store");
       if (!sId) return this.router.parseUrl(errorUrl);
       this.urlService.setStoreId(sId);
