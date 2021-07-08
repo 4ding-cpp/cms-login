@@ -1,6 +1,6 @@
 {
   "/sign/": {
-    "target": "https://sales.4ding.pro",
+    "target": "https://store.4ding.pro",
     "secure": false,
     "changeOrigin": true
   }
