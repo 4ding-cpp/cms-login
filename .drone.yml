@@ -1,6 +1,7 @@
+---
 kind: pipeline
 type: docker
-name: 4d-cms-login
+name: cms-login-develop
 steps:
   - name: build-cms-login
     image: node:12.9.1-alpine
@@ -8,20 +9,6 @@ steps:
       - npm install
       - npm run build
 
-  # - name: publish-cms-login
-  #   image: plugins/docker
-  #   settings:
-  #     username:
-  #       from_secret: docker_hub_username
-  #     password:
-  #       from_secret: docker_hub_password
-  #     repo: 4ding/cms-login
-  #     cache_from: 4ding/cms-login
-  #     tags:
-  #       - "latest"
-  #       - "0.0.0"
-  #     dockerfile: drone-ci/Dockerfile
-      
   - name: publish-gcr-cms-login
     image: plugins/gcr
     settings:
@@ -36,7 +23,33 @@ steps:
 
 trigger:
   branch:
-  - main
+    - develop
   event:
-  - push
+    - push
 
+---
+kind: pipeline
+type: docker
+name: cms-login-main
+steps:
+  - name: build-cms-login
+    image: node:12.9.1-alpine
+    commands:
+      - npm install
+      - npm run build
+
+  - name: publish-gcr-cms-login
+    image: plugins/gcr
+    settings:
+      repo: ding4pro/4ding/cms-login
+      cache_from: ding4pro/4ding/cms-login
+      registry: asia.gcr.io
+      json_key:
+        from_secret: gcr_credential
+      tags:
+        - ${DRONE_TAG}
+      dockerfile: drone-ci/Dockerfile
+
+trigger:
+  event:
+    - tag
