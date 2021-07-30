@@ -25,6 +25,7 @@ const ErrorCodes: IErrorCode[] = [
   { code: 15, name: "invalid_password" },
   { code: 16, name: "invalid_password_token" },
   { code: 17, name: "invalid_otp" },
+  { code: 19, name: "" },
 
   { code: 21, name: "invalid_store" },
   { code: 22, name: "invalid_account_exist" },
@@ -51,7 +52,7 @@ export class ErrorCodeService {
   getMsgName(code: number): string {
     let i = this.position(code);
     if (i === -1) return this.ErrorOdd;
-    return this.ErrorCodes[i].name;
+    return this.ErrorCodes[i].name || this.ErrorCodes[i].msg;
   }
 
   position(code: number): number {

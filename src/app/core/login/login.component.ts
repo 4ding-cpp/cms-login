@@ -46,7 +46,7 @@ export class LoginComponent implements OnInit, OnDestroy, AfterViewChecked {
     private keyupService: KeyupService,
     private errorcodeService: ErrorCodeService,
     private cdr: ChangeDetectorRef
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.init();
