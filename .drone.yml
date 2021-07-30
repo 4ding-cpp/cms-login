@@ -39,3 +39,4 @@ trigger:
   - main
   event:
   - push
+
