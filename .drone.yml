@@ -7,29 +7,35 @@ steps:
     commands:
       - npm install
       - npm run build
-  # - name: bucket
-  #   image: plugins/gcs
+
+  # - name: publish-cms-login
+  #   image: plugins/docker
   #   settings:
-  #     source: dist
-  #     target: ding4site/
-  #     gzip: html,js,json,css,jpg,png,svg,txt,ico
-  #     token:
-  #       from_secret: gcr_credential
-  - name: publish-cms-login
-    image: plugins/docker
-    when:
-      branch:
-        - master
-      event:
-        - push
+  #     username:
+  #       from_secret: docker_hub_username
+  #     password:
+  #       from_secret: docker_hub_password
+  #     repo: 4ding/cms-login
+  #     cache_from: 4ding/cms-login
+  #     tags:
+  #       - "latest"
+  #       - "0.0.0"
+  #     dockerfile: drone-ci/Dockerfile
+      
+  - name: publish-gcr-cms-login
+    image: plugins/gcr
     settings:
-      username:
-        from_secret: docker_hub_username
-      password:
-        from_secret: docker_hub_password
-      repo: 4ding/cms-login
-      cache_from: 4ding/cms-login
+      repo: ding4pro/4ding/cms-login
+      cache_from: ding4pro/4ding/cms-login
+      registry: asia.gcr.io
+      json_key:
+        from_secret: gcr_credential
       tags:
         - "latest"
-        - "0.0.0"
       dockerfile: drone-ci/Dockerfile
+
+trigger:
+  branch:
+  - main
+  event:
+  - push
