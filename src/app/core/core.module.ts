@@ -5,10 +5,11 @@ import { CoreComponent } from "./core.component";
 import { ErrorComponent } from "./error/error.component";
 import { GuardService } from "./guard.service";
 import { LoginComponent } from "./login/login.component";
+import { SettingComponent } from "./setting/setting.component";
 
 @NgModule({
   imports: [SharedModule, CoreRoutingModule],
-  declarations: [CoreComponent, LoginComponent, ErrorComponent],
+  declarations: [CoreComponent, LoginComponent, ErrorComponent, SettingComponent],
   exports: [CoreComponent],
   providers: [GuardService],
 })

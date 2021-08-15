@@ -2,16 +2,13 @@
   "Key": "Value(English)",
   "all": "all",
   "select": "select",
-
   "chinese": "Chinese",
   "english": "English",
   "traditional": "Traditional",
-
   "cms_admin": "cmsAdmin",
   "cms_business": "cmsBusiness",
   "cms_store": "cmsStore",
   "cms_sales": "cmsSales",
-
   "cancel": "cancel",
   "enter": "enter",
   "back": "back",
@@ -19,18 +16,14 @@
   "logout": "logout",
   "reset": "reset",
   "next": "next",
-
   "welcome": "Welcome back!",
   "invalid_store_url": "",
-
   "fill_account": "Fill out your account",
   "fill_password": "Fill out your password",
   "fill_otp": "fill_otp",
-
   "import_password": "import_password",
   "import_account": "import_account",
   "import_otp": "import_otp",
-
   "dialog_alert": "dialog_alert",
   "success": "success",
   "required": "required",
@@ -44,9 +37,11 @@
   "invalid_password": "invalid_password",
   "invalid_password_token": "invalid_password_token",
   "invalid_otp": "invalid_otp",
-
   "invalid_store": "invalid_store",
   "invalid_account_exist": "invalid_account_exist",
   "invalid_password_forget": "invalid_password_forget",
-  "invalid_password_change": "invalid_password_change"
+  "invalid_password_change": "invalid_password_change",
+  "building": "Business Building",
+  "errorBtn": "errorBtn",
+  "errorMsg": "errorMsg"
 }

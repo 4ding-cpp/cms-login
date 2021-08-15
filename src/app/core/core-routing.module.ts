@@ -4,6 +4,7 @@ import { CoreComponent } from "./core.component";
 import { ErrorComponent } from "./error/error.component";
 import { GuardService } from "./guard.service";
 import { LoginComponent } from "./login/login.component";
+import { SettingComponent } from "./setting/setting.component";
 
 const routes: Routes = [
   {
@@ -14,6 +15,10 @@ const routes: Routes = [
         path: "in",
         canActivate: [GuardService],
         component: LoginComponent,
+      },
+      {
+        path: "setting",
+        component: SettingComponent,
       },
       {
         path: "error",

@@ -10,6 +10,7 @@ export const COPYRIGHT = "4DinG";
 export const APICheckUrl = "/sign/check";
 export const APILoginUrl = "/sign/in";
 export const APIOTPUrl = "/sign/otp";
+export const APIFirstUrl = "/sign/first";
 export const LOCALCMS = "localhost:4200";
 
 export const LoginImg = "assets/img/login.png";

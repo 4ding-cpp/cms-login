@@ -2,16 +2,13 @@
   "Key": "Value(Simplfied Chinese Chinese)",
   "all": "全部",
   "select": "请选择",
-
   "chinese": "简体中文",
   "english": "英文",
   "traditional": "繁体中文",
-
   "cms_admin": "四丁总管理系统",
   "cms_business": "通路总管理系统",
   "cms_store": "商店总管理系统",
   "cms_sales": "商店总管理系统-推广者",
-
   "cancel": "取消",
   "enter": "确认",
   "back": "返回",
@@ -19,18 +16,14 @@
   "logout": "登出",
   "reset": "重置",
   "next": "下一步",
-
   "welcome": "欢迎回来！",
   "invalid_store_url": "网址导向错误，请确认您的商店代号是否正确。或请洽询 4DinG客服。",
-
   "fill_account": "请输入您的帐号",
   "fill_password": "请输入您的密码",
   "fill_otp": "Google Authenticator 验证码（未在白名单范围内IP）",
-
   "import_password": "请输入英数字至少6位数",
   "import_account": "请输入手机号码或电子信箱",
   "import_otp": "请输入Google Authenticator 验证码",
-
   "dialog_alert": "提示",
   "success": "成功",
   "required": "必填",
@@ -44,9 +37,11 @@
   "invalid_password": "密码错误，请再确认一次",
   "invalid_password_token": "密码 Token 无效",
   "invalid_otp": "OTP 无效",
-
   "invalid_store": "无此商店代号",
   "invalid_account_exist": "帐号不存在",
   "invalid_password_forget": "忘记密码的请求无效",
-  "invalid_password_change": "更新密码错误"
+  "invalid_password_change": "更新密码错误",
+  "building": "资料库建置中",
+  "errorBtn": "前往登入页试试",
+  "errorMsg": "建置过程异常"
 }

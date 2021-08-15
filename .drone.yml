@@ -1,6 +1,6 @@
 ---
 kind: pipeline
-type: docker
+type: kubernetes
 name: cms-login-develop
 steps:
   - name: build-cms-login
@@ -29,7 +29,7 @@ trigger:
 
 ---
 kind: pipeline
-type: docker
+type: kubernetes
 name: cms-login-main
 steps:
   - name: build-cms-login

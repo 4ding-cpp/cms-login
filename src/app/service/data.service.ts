@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { LoggerService } from "./logger.service";
-import { APICheckUrl, APILoginUrl, APIOTPUrl } from "../config";
+import { APICheckUrl, APILoginUrl, APIOTPUrl, APIFirstUrl } from "../config";
 import { Observable } from "rxjs/internal/Observable";
 import {
   HttpClient,
@@ -45,7 +45,7 @@ export class DataService {
     responseType: "text" as "text",
   };
 
-  constructor(private logger: LoggerService, private http: HttpClient) {}
+  constructor(private logger: LoggerService, private http: HttpClient) { }
 
   connectAccount(obj: ILogin, store_id: string): Observable<IRes> {
     let body = {
@@ -88,6 +88,28 @@ export class DataService {
       }),
       map((res: HttpResponse<string>) => {
         let o = <IRes>{};
+        if (res.status === 200) {
+          this.logger.print("http response", res);
+          o = JSON.parse(res.body);
+        } else {
+          this.logger.print("http error", res);
+          o = { code: res.status, value: "" };
+        }
+        return o;
+      })
+    );
+  }
+
+  connectRegister(register: string): Observable<IRes> {
+    let url = `${APIFirstUrl}?code=${register}`
+
+    return this.http.get(url, this.options).pipe(
+      catchError((err: HttpErrorResponse) => {
+        return of(err);
+      }),
+      map((res: HttpResponse<string>) => {
+        let o = <IRes>{};
+        console.log(res.status, res.status === 200)
         if (res.status === 200) {
           this.logger.print("http response", res);
           o = JSON.parse(res.body);
