@@ -1,15 +1,15 @@
 import { Injectable } from "@angular/core";
 import { LoggerService } from "./logger.service";
-import { LOCALCMS } from "../config";
+import { LocalCmsUrl } from "../config";
 
 @Injectable({
   providedIn: "root",
 })
 export class UrlService {
-  LOCALCMS = LOCALCMS;
+  LocalCmsUrl = LocalCmsUrl;
   host = "";
   protocal = "";
-  localCMS = false;
+  local = false;
   store_id = "";
   origin = "";
 
@@ -26,7 +26,7 @@ export class UrlService {
   }
 
   setLocalCMS(toggle: boolean) {
-    this.localCMS = toggle;
+    this.local = toggle;
   }
 
   setOrigin(origin: string) {
@@ -46,10 +46,11 @@ export class UrlService {
   }
 
   cmsUrl(token: string): string {
-    let url = `/?token=${token}`;
-    if (this.localCMS) {
-      url = `http://${LOCALCMS}/?token=${token}`;
+    let url = '';
+    if (this.local) {
+      url = `http://${LocalCmsUrl}`;
     }
+    url += `/?token=${token}`;
     this.logger.print("CMS", url);
     return url;
   }
