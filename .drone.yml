@@ -51,5 +51,7 @@ steps:
       dockerfile: drone-ci/Dockerfile
 
 trigger:
+  branch:
+    - main
   event:
-    - tag
+    - push
