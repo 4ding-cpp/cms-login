@@ -12,8 +12,8 @@ steps:
   - name: publish-gcr-cms-login
     image: plugins/gcr
     settings:
-      repo: ding4pro/4ding/cms-login
-      cache_from: ding4pro/4ding/cms-login
+      repo: ding4pro/4ding/cms-login/develop
+      cache_from: ding4pro/4ding/cms-login/develop
       registry: asia.gcr.io
       json_key:
         from_secret: gcr_credential
@@ -24,6 +24,34 @@ steps:
 trigger:
   branch:
     - develop
+  event:
+    - push
+---
+kind: pipeline
+type: kubernetes
+name: cms-login-release
+steps:
+  - name: build-cms-login
+    image: node:12.9.1-alpine
+    commands:
+      - npm install
+      - npm run build
+
+  - name: publish-gcr-cms-login
+    image: plugins/gcr
+    settings:
+      repo: ding4pro/4ding/cms-login/release
+      cache_from: ding4pro/4ding/cms-login/release
+      registry: asia.gcr.io
+      json_key:
+        from_secret: gcr_credential
+      tags:
+        - "latest"
+      dockerfile: drone-ci/Dockerfile
+
+trigger:
+  branch:
+    - release/*
   event:
     - push
 
@@ -41,13 +69,13 @@ steps:
   - name: publish-gcr-cms-login
     image: plugins/gcr
     settings:
-      repo: ding4pro/4ding/cms-login
-      cache_from: ding4pro/4ding/cms-login
+      repo: ding4pro/4ding/cms-login/main
+      cache_from: ding4pro/4ding/cms-login/main
       registry: asia.gcr.io
       json_key:
         from_secret: gcr_credential
       tags:
-        - ${DRONE_TAG}
+        - "latest"
       dockerfile: drone-ci/Dockerfile
 
 trigger:
