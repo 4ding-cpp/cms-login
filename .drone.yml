@@ -66,14 +66,15 @@ steps:
       - npm install
       - npm run build
 
-  - name: publish-gcr-cms-login
-    image: plugins/gcr
+  - name: publish
+    image: plugins/docker
     settings:
-      repo: ding4pro/4ding/cms-login/main
-      cache_from: ding4pro/4ding/cms-login/main
-      registry: asia.gcr.io
-      json_key:
-        from_secret: gcr_credential
+      repo: 4ding/cms-login
+      cache_from: 4ding/cms-login
+      username:
+        from_secret: docker_username
+      password:
+        from_secret: docker_password
       tags:
         - "latest"
       dockerfile: drone-ci/Dockerfile
